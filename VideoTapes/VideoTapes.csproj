@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VideoTapes</RootNamespace>
     <AssemblyName>VideoTapes</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,10 +34,41 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>xine.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Documents\Visual Studio 2017\Projets\Médias\VideoTapes\VideoTapes\bin\Debug\AxInterop.WMPLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005, Version=1.5.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FrameGrabber\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FrameGrabber">
+      <HintPath>..\..\FrameGrabber\FrameGrabber.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>D:\Documents\Visual Studio 2017\Projets\Médias\VideoTapes\VideoTapes\bin\Debug\Interop.WMPLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,14 +80,77 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Compléments.cs" />
+    <Compile Include="DataSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataSelector.Designer.cs">
+      <DependentUpon>DataSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delegates.cs" />
+    <Compile Include="DisplayShotPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DisplayShotPanel.Designer.cs">
+      <DependentUpon>DisplayShotPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayScenesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DisplayScenesPanel.Designer.cs">
+      <DependentUpon>DisplayScenesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Keywords.cs" />
+    <Compile Include="KeywordScene.cs" />
+    <Compile Include="Lieux.cs" />
+    <Compile Include="Medias.cs" />
+    <Compile Include="Modèle.cs" />
+    <Compile Include="Pays.cs" />
+    <Compile Include="Personne.cs" />
+    <Compile Include="PleinEcran.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PleinEcran.Designer.cs">
+      <DependentUpon>PleinEcran.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Provinces.cs" />
+    <Compile Include="Présence.cs" />
+    <Compile Include="PrésenceScène.cs" />
+    <Compile Include="SceneIndexer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SceneIndexer.Designer.cs">
+      <DependentUpon>SceneIndexer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scenes.cs" />
+    <Compile Include="SequenceScene.cs" />
+    <Compile Include="Shots.cs" />
+    <Compile Include="Tapes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tapes.Designer.cs">
+      <DependentUpon>Tapes.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TimeLine.Designer.cs">
+      <DependentUpon>TimeLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Videos.cs" />
+    <Compile Include="Villes.cs" />
+    <EmbeddedResource Include="DataSelector.resx">
+      <DependentUpon>DataSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayShotPanel.resx">
+      <DependentUpon>DisplayShotPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayScenesPanel.resx">
+      <DependentUpon>DisplayScenesPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +159,18 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SceneIndexer.resx">
+      <DependentUpon>SceneIndexer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tapes.resx">
+      <DependentUpon>Tapes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeLine.resx">
+      <DependentUpon>TimeLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +183,59 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PlayHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ActualSizeHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom_5442.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut_12927.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOutButton_17x17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Route\Route.csproj">
+      <Project>{89cb73d1-ff4f-4d16-8812-f83b76d6c2c5}</Project>
+      <Name>Route</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\full-screen-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-toggle-full-screen-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.png" />
+    <None Include="Resources\StopHS.png" />
+    <None Include="Resources\PauseHS.png" />
+    <None Include="Resources\PlayHS1.png" />
+    <Content Include="xine.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

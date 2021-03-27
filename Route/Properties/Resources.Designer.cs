@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VideoTapes.Properties {
+namespace Route.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace VideoTapes.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VideoTapes.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Route.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace VideoTapes.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ActualSizeHS {
+        internal static System.Drawing.Bitmap Autobus_50 {
             get {
-                object obj = ResourceManager.GetObject("ActualSizeHS", resourceCulture);
+                object obj = ResourceManager.GetObject("Autobus-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace VideoTapes.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap export {
+        internal static System.Drawing.Bitmap avion_50 {
             get {
-                object obj = ResourceManager.GetObject("export", resourceCulture);
+                object obj = ResourceManager.GetObject("avion-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace VideoTapes.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap full_screen_64 {
+        internal static System.Drawing.Bitmap TextBox_708 {
             get {
-                object obj = ResourceManager.GetObject("full-screen-64", resourceCulture);
+                object obj = ResourceManager.GetObject("TextBox_708", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace VideoTapes.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_toggle_full_screen_50 {
+        internal static System.Drawing.Bitmap Train_50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-toggle-full-screen-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Train-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,69 +103,9 @@ namespace VideoTapes.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PauseHS {
+        internal static System.Drawing.Bitmap Voiture46108 {
             get {
-                object obj = ResourceManager.GetObject("PauseHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PlayHS {
-            get {
-                object obj = ResourceManager.GetObject("PlayHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PlayHS1 {
-            get {
-                object obj = ResourceManager.GetObject("PlayHS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap StopHS {
-            get {
-                object obj = ResourceManager.GetObject("StopHS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Zoom_5442 {
-            get {
-                object obj = ResourceManager.GetObject("Zoom_5442", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ZoomOut_12927 {
-            get {
-                object obj = ResourceManager.GetObject("ZoomOut_12927", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ZoomOutButton_17x17 {
-            get {
-                object obj = ResourceManager.GetObject("ZoomOutButton_17x17", resourceCulture);
+                object obj = ResourceManager.GetObject("Voiture46108", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

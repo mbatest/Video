@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace VideoTapes
 {
-    public partial class Form1 : Form
+    public partial class PleinEcran : Form
     {
-        public Form1()
+        public PleinEcran()
         {
             InitializeComponent();
         }

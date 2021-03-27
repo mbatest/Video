@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VideoTapes
+namespace Route
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace VideoTapes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Tapes());
+            Application.Run(new DrawRoute());
         }
     }
 }
