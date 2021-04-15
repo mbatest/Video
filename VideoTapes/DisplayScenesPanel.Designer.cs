@@ -35,10 +35,13 @@
             // 
             this.scrollPictures.Dock = System.Windows.Forms.DockStyle.Right;
             this.scrollPictures.Location = new System.Drawing.Point(479, 0);
+            this.scrollPictures.Maximum = 1000;
             this.scrollPictures.Name = "scrollPictures";
             this.scrollPictures.Size = new System.Drawing.Size(17, 356);
+            this.scrollPictures.SmallChange = 5;
             this.scrollPictures.TabIndex = 1;
             this.scrollPictures.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollPictures_Scroll);
+            this.scrollPictures.ValueChanged += new System.EventHandler(this.scrollPictures_ValueChanged);
             // 
             // DisplayScenesPanel
             // 

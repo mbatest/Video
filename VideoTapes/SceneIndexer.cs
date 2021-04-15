@@ -32,10 +32,12 @@ namespace VideoTapes
             cBKeyword.SelectedIndex = -1;
             cBPersonnes.SelectedIndex = -1;
             Famille.SelectedIndex = -1;
+            Famille.Text = "";
         }
         public void SetScene(Scenes sc)
         {
             currentScene = sc;
+            GetData();
             listPersons.Items.Clear();
             SceneTitle.Text = currentScene.Titre;
             comment.Text = currentScene.Commentaire;
@@ -44,20 +46,20 @@ namespace VideoTapes
                 cBPays.SelectedItem = sc.Lieux.Villes.Pays;
                 cBPays.Text = sc.Lieux.Villes.Pays.Nom_Pays;
                 cBVille.Text = sc.Lieux.Villes.Nom;
-                cBLieu.Text = sc.Lieux.Lieu;
                 cBVille.SelectedItem = sc.Lieux.Villes;
-                cBLieu.SelectedItem = sc.Lieux;
-            }
+                 cBLieu.Text = sc.Lieux.Lieu;
+           }
             else
             {
                 cBPays.SelectedItem = md.Pays.Single(p => p.Nom_Pays == "France");
                 cBVille.Text = "";
                 cBLieu.Text = "";
-                UpDateVilles((Pays)cBPays.SelectedItem);
             }
             ShotNumber.Text = currentScene.SequenceScene.Count.ToString();
-            Duration.Text = Videos.DuréeShot(currentScene.FrameCount);
+            Duration.Text = Videos.DuréeClipString(currentScene.FrameCount);
             keywordList.Items.Clear();
+            startFrame.Text = currentScene.StartFrame.ToString();
+            endFrame.Text = currentScene.EndFrame.ToString();
             foreach (var x in currentScene.KeywordScene)
             {
                 AddKeywordToListView(x.Keywords);
@@ -70,51 +72,6 @@ namespace VideoTapes
 
             Valid.Enabled = true;
         }
-        //    public void SetScene(List<Scenes> sc)
-        //    {
-        //        scenes = sc;
-        //        currentScene = sc[0];
-        //        codes = null;
-        // //       codes = Utils.accBd.GetCodesForPlace(currentScene.Code_Lieu);
-        //        for (int i = 0; i < countries.Count; i++)
-        //        {
-        //            Pays ct = (Pays)countries[i];
-        //            if (ct.Code_Pays == codes[1])
-        //            {
-        //                cBPays.SelectedIndex = i;
-        //                break;
-        //            }
-        //        }
-        // //       cBPays.SelectedItem= currentScene.
-
-        //        if (cBPays.SelectedItem != null)
-        //            UpDateVilles((Pays)cBPays.SelectedItem);
-        //        SceneTitle.Text = currentScene.Commentaire;
-        //        listPersons.Items.Clear();
-        // //       personsInScene = Utils.accBd.GetPeopleInAScene(currentScene);
-        //        foreach (Personne p in personsInScene)
-        //        {
-        //            AddPersonToList(p);
-        //        }
-        //        keywordList.Items.Clear();
-        ////        keywords = Utils.accBd.GetKeywordInAScene(currentScene);
-        //        foreach (Keywords k in keywords)
-        //        {
-        //            ListViewItem lst = new ListViewItem(k.Keyword);
-        //            lst.Tag = k;
-        //            keywordList.Items.Add(lst);
-        //        }
-        //        //ShotNumber.Text = currentScene.ShotsInScene.Count.ToString();
-        //        //Duration.Text = currentScene.Duration.ToString();
-        //        valid.Enabled = true;
-        //        addKeyword.Enabled = false;
-        //        AddPerson.Enabled = false;
-        //        cBKeyword.SelectedIndex = -1;
-        //        cBPersonnes.SelectedIndex = -1;
-        //        Famille.SelectedIndex = -1;
-        //        NouvFamille.Text = "";
-        //        Prenom.Text = "";
-        //    }
         #endregion
         #region Private members
         //List<Pays> countries;
@@ -146,6 +103,8 @@ namespace VideoTapes
             #region Mots clés
             cBKeyword.DataSource = md.Keywords.Distinct().OrderBy(k => k.Keyword).ToList();
             #endregion
+            cBKeyword.SelectedIndex = -1;
+            cBPersonnes.SelectedIndex = -1;
         }
         private void Valid_Click(object sender, EventArgs e)
         {
@@ -180,9 +139,13 @@ namespace VideoTapes
         private void CBPays_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpDateVilles((Pays)cBPays.SelectedItem);
+            cBVille.SelectedIndex = -1;
+
         }
         private void CBVille_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBVille.SelectedIndex == -1)
+                return;
             UpDateLieux((Villes)cBVille.SelectedItem);
         }
         private void UpDateVilles(Pays rech)
@@ -267,11 +230,13 @@ namespace VideoTapes
             if (p != null)
             {
                 AddPersonToListView(p);
-                currentScene.AddPersonToScene(p);
+                currentScene.AddPerson(p);
                 md.SaveChanges();
                 GetData();
                 SceneInfoChanged?.Invoke(this, new SceneSelectedArgs { scene = currentScene });
             }
+            Famille.SelectedIndex = -1;
+            cBPersonnes.SelectedIndex = -1;
         }
         private void CBPersonnes_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -296,6 +261,7 @@ namespace VideoTapes
                     listPersons.SelectedItems[0].Remove();
                     var pers = currentScene.PrésenceScène.Where(ke => ke.Personnes == p);
                     pers.ToList().ForEach(pp => currentScene.PrésenceScène.ToList().Remove(pp));
+       //             currentScene.DeletePersonne(p);
                     break;
                 case "Remove keyword":
                     Keywords k = (Keywords)keywordList.SelectedItems[0].Tag;
@@ -328,7 +294,7 @@ namespace VideoTapes
         }
         private void NewKeyword_TextChanged(object sender, EventArgs e)
         {
-            AddKey.Enabled = newKeyword.Text != "";
+            AddKey.Enabled = !String.IsNullOrEmpty(newKeyword.Text);
         }
         private void AddKey_Click(object sender, EventArgs e)
         {
@@ -344,33 +310,16 @@ namespace VideoTapes
             }
             else if (cBKeyword.SelectedIndex != -1)
                 kw = (Keywords)cBKeyword.Items[cBKeyword.SelectedIndex];
-            currentScene.AddKeywordToScene(kw);
+            currentScene.AddKeyword(kw);
+            AddKeywordToListView(kw);
             newKeyword.Text ="";
             md.SaveChanges();
+            GetData();
+            cBKeyword.SelectedIndex = -1;
             SceneInfoChanged?.Invoke(this, new SceneSelectedArgs { scene = currentScene });
         }
         #endregion
 
         #endregion
-        private void ListPersons_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listPersons.SelectedIndices.Count > 0)
-            {
-                int i = listPersons.SelectedIndices[0];
-                listPersons.Items.RemoveAt(i);
-                currentScene.DeletePersonne((Personne)listPersons.SelectedItems[0].Tag);
-                md.SaveChanges();
-            }
-        }
-        private void KeywordList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (keywordList.SelectedIndices.Count > 0)
-            {
-                int i = keywordList.SelectedIndices[0];
-                keywordList.Items.RemoveAt(i);
-                currentScene.DeleteKeyword((Keywords)keywordList.SelectedItems[0].Tag);
-                md.SaveChanges();
-            }
-        }
     }
 }

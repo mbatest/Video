@@ -52,6 +52,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panDetailSeq = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelFin = new System.Windows.Forms.Label();
+            this.endFrame = new System.Windows.Forms.TextBox();
+            this.labelDeb = new System.Windows.Forms.Label();
+            this.startFrame = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Duration = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -154,7 +158,7 @@
             this.listPersons.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listPersons.TabIndex = 77;
             this.listPersons.UseCompatibleStateImageBehavior = false;
-            this.listPersons.SelectedIndexChanged += new System.EventHandler(this.ListPersons_SelectedIndexChanged);
+            //this.listPersons.SelectedIndexChanged += new System.EventHandler(this.ListPersons_SelectedIndexChanged);
             this.listPersons.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListPersons_MouseClick);
             // 
             // cBPersonnes
@@ -200,7 +204,7 @@
             this.keywordList.Size = new System.Drawing.Size(217, 59);
             this.keywordList.TabIndex = 80;
             this.keywordList.UseCompatibleStateImageBehavior = false;
-            this.keywordList.SelectedIndexChanged += new System.EventHandler(this.KeywordList_SelectedIndexChanged);
+            //this.keywordList.SelectedIndexChanged += new System.EventHandler(this.KeywordList_SelectedIndexChanged);
             this.keywordList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.KeywordList_MouseClick);
             // 
             // label1
@@ -208,9 +212,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 75;
-            this.label1.Text = "Mot-clé";
+            this.label1.Text = "Choix mot-clé";
             // 
             // cBKeyword
             // 
@@ -294,7 +298,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(253, 281);
+            this.splitContainer1.Size = new System.Drawing.Size(252, 306);
             this.splitContainer1.SplitterDistance = 224;
             this.splitContainer1.TabIndex = 75;
             // 
@@ -304,7 +308,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(253, 281);
+            this.panel1.Size = new System.Drawing.Size(252, 306);
             this.panel1.TabIndex = 35;
             // 
             // panDetailSeq
@@ -314,11 +318,15 @@
             this.panDetailSeq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panDetailSeq.Location = new System.Drawing.Point(0, 0);
             this.panDetailSeq.Name = "panDetailSeq";
-            this.panDetailSeq.Size = new System.Drawing.Size(253, 281);
+            this.panDetailSeq.Size = new System.Drawing.Size(252, 306);
             this.panDetailSeq.TabIndex = 33;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelFin);
+            this.groupBox1.Controls.Add(this.endFrame);
+            this.groupBox1.Controls.Add(this.labelDeb);
+            this.groupBox1.Controls.Add(this.startFrame);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.Duration);
             this.groupBox1.Controls.Add(this.label8);
@@ -332,9 +340,43 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 281);
+            this.groupBox1.Size = new System.Drawing.Size(252, 306);
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
+            // 
+            // labelFin
+            // 
+            this.labelFin.AutoSize = true;
+            this.labelFin.Location = new System.Drawing.Point(132, 85);
+            this.labelFin.Name = "labelFin";
+            this.labelFin.Size = new System.Drawing.Size(21, 13);
+            this.labelFin.TabIndex = 51;
+            this.labelFin.Text = "Fin";
+            // 
+            // endFrame
+            // 
+            this.endFrame.Location = new System.Drawing.Point(156, 86);
+            this.endFrame.Name = "endFrame";
+            this.endFrame.ReadOnly = true;
+            this.endFrame.Size = new System.Drawing.Size(72, 20);
+            this.endFrame.TabIndex = 50;
+            // 
+            // labelDeb
+            // 
+            this.labelDeb.AutoSize = true;
+            this.labelDeb.Location = new System.Drawing.Point(6, 86);
+            this.labelDeb.Name = "labelDeb";
+            this.labelDeb.Size = new System.Drawing.Size(36, 13);
+            this.labelDeb.TabIndex = 49;
+            this.labelDeb.Text = "Début";
+            // 
+            // startFrame
+            // 
+            this.startFrame.Location = new System.Drawing.Point(58, 85);
+            this.startFrame.Name = "startFrame";
+            this.startFrame.ReadOnly = true;
+            this.startFrame.Size = new System.Drawing.Size(72, 20);
+            this.startFrame.TabIndex = 48;
             // 
             // label9
             // 
@@ -375,7 +417,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(9, 86);
+            this.tabControl1.Location = new System.Drawing.Point(9, 112);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(237, 188);
@@ -532,7 +574,7 @@
             this.Controls.Add(this.keyword);
             this.Controls.Add(this.label6);
             this.Name = "SceneIndexControl";
-            this.Size = new System.Drawing.Size(253, 281);
+            this.Size = new System.Drawing.Size(252, 306);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -600,5 +642,9 @@
         private System.Windows.Forms.Button Valid;
         private System.Windows.Forms.ComboBox keyword;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelFin;
+        private System.Windows.Forms.TextBox endFrame;
+        private System.Windows.Forms.Label labelDeb;
+        private System.Windows.Forms.TextBox startFrame;
     }
 }

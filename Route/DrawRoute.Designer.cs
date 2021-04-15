@@ -41,9 +41,10 @@
             this.carToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerPrincipal = new System.Windows.Forms.SplitContainer();
             this.drawPanel = new Route.DoubleBufferPanel();
             this.drawRecord = new Route.DoubleBufferPanel();
+            this.mediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.dVD720X576ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movieType = new System.Windows.Forms.ToolStripDropDownButton();
@@ -67,10 +68,12 @@
             this.lineWidth = new Route.ToolStripSlider();
             this.labFont = new System.Windows.Forms.ToolStripButton();
             this.play = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPrincipal)).BeginInit();
+            this.splitContainerPrincipal.Panel1.SuspendLayout();
+            this.splitContainerPrincipal.Panel2.SuspendLayout();
+            this.splitContainerPrincipal.SuspendLayout();
+            this.drawRecord.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -87,14 +90,14 @@
             // aVCHD1488XToolStripMenuItem
             // 
             this.aVCHD1488XToolStripMenuItem.Name = "aVCHD1488XToolStripMenuItem";
-            this.aVCHD1488XToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aVCHD1488XToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.aVCHD1488XToolStripMenuItem.Text = "AVCHD 1488 x";
             this.aVCHD1488XToolStripMenuItem.Click += new System.EventHandler(this.aVCHD1488XToolStripMenuItem_Click);
             // 
             // aVCHD1920X1080ToolStripMenuItem
             // 
             this.aVCHD1920X1080ToolStripMenuItem.Name = "aVCHD1920X1080ToolStripMenuItem";
-            this.aVCHD1920X1080ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aVCHD1920X1080ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.aVCHD1920X1080ToolStripMenuItem.Text = "AVCHD 1920 x 1080";
             this.aVCHD1920X1080ToolStripMenuItem.Click += new System.EventHandler(this.aVCHD1920X1080ToolStripMenuItem_Click);
             // 
@@ -105,6 +108,7 @@
             // 
             // Etiq
             // 
+            this.Etiq.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Etiq.Name = "Etiq";
             this.Etiq.Size = new System.Drawing.Size(50, 26);
             this.Etiq.ToolTipText = "Etiquette";
@@ -147,7 +151,7 @@
             // 
             this.busToolStripMenuItem.Image = global::Route.Properties.Resources.Autobus_50;
             this.busToolStripMenuItem.Name = "busToolStripMenuItem";
-            this.busToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.busToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.busToolStripMenuItem.Text = "Bus";
             this.busToolStripMenuItem.Click += new System.EventHandler(this.busToolStripMenuItem_Click);
             // 
@@ -155,7 +159,7 @@
             // 
             this.carToolStripMenuItem.Image = global::Route.Properties.Resources.Voiture46108;
             this.carToolStripMenuItem.Name = "carToolStripMenuItem";
-            this.carToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.carToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.carToolStripMenuItem.Text = "Car";
             this.carToolStripMenuItem.Click += new System.EventHandler(this.carToolStripMenuItem_Click);
             // 
@@ -163,7 +167,7 @@
             // 
             this.planeToolStripMenuItem.Image = global::Route.Properties.Resources.avion_50;
             this.planeToolStripMenuItem.Name = "planeToolStripMenuItem";
-            this.planeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.planeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.planeToolStripMenuItem.Text = "Plane";
             this.planeToolStripMenuItem.Click += new System.EventHandler(this.planeToolStripMenuItem_Click);
             // 
@@ -171,26 +175,26 @@
             // 
             this.trainToolStripMenuItem.Image = global::Route.Properties.Resources.Train_50;
             this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
-            this.trainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.trainToolStripMenuItem.Text = "Train";
             this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 26);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainerPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPrincipal.Location = new System.Drawing.Point(0, 26);
+            this.splitContainerPrincipal.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.drawPanel);
+            this.splitContainerPrincipal.Panel1.Controls.Add(this.drawPanel);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.drawRecord);
-            this.splitContainer1.Size = new System.Drawing.Size(1021, 413);
-            this.splitContainer1.SplitterDistance = 596;
-            this.splitContainer1.TabIndex = 9;
+            this.splitContainerPrincipal.Panel2.Controls.Add(this.drawRecord);
+            this.splitContainerPrincipal.Size = new System.Drawing.Size(1021, 413);
+            this.splitContainerPrincipal.SplitterDistance = 596;
+            this.splitContainerPrincipal.TabIndex = 9;
             // 
             // drawPanel
             // 
@@ -207,12 +211,24 @@
             // 
             // drawRecord
             // 
+            this.drawRecord.Controls.Add(this.mediaPlayer);
             this.drawRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawRecord.Location = new System.Drawing.Point(0, 0);
             this.drawRecord.Name = "drawRecord";
             this.drawRecord.Size = new System.Drawing.Size(421, 413);
             this.drawRecord.TabIndex = 1;
             this.drawRecord.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawRecord_Paint);
+            // 
+            // mediaPlayer
+            // 
+            this.mediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaPlayer.Enabled = true;
+            this.mediaPlayer.Location = new System.Drawing.Point(0, 0);
+            this.mediaPlayer.Name = "mediaPlayer";
+            this.mediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mediaPlayer.OcxState")));
+            this.mediaPlayer.Size = new System.Drawing.Size(421, 413);
+            this.mediaPlayer.TabIndex = 0;
+            this.mediaPlayer.Resize += new System.EventHandler(this.mediaPlayer_Resize);
             // 
             // vScrollBar1
             // 
@@ -226,7 +242,7 @@
             // dVD720X576ToolStripMenuItem
             // 
             this.dVD720X576ToolStripMenuItem.Name = "dVD720X576ToolStripMenuItem";
-            this.dVD720X576ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dVD720X576ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.dVD720X576ToolStripMenuItem.Text = "DVD 720 x 576";
             this.dVD720X576ToolStripMenuItem.Click += new System.EventHandler(this.dVD720X576ToolStripMenuItem_Click);
             // 
@@ -456,16 +472,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 461);
             this.Controls.Add(this.hScrollBar1);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainerPrincipal);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "DrawRoute";
             this.Text = "Draw Route";
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainerPrincipal.Panel1.ResumeLayout(false);
+            this.splitContainerPrincipal.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPrincipal)).EndInit();
+            this.splitContainerPrincipal.ResumeLayout(false);
+            this.drawRecord.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -489,7 +507,7 @@
         private System.Windows.Forms.ToolStripMenuItem carToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerPrincipal;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.ToolStripMenuItem dVD720X576ToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton movieType;
@@ -515,6 +533,7 @@
         private DoubleBufferPanel drawRecord;
         private System.Windows.Forms.ToolStripButton labFont;
         private System.Windows.Forms.ToolStripButton play;
+        private AxWMPLib.AxWindowsMediaPlayer mediaPlayer;
     }
 }
 

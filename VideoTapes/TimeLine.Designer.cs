@@ -34,10 +34,10 @@
             this.smaller = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ouvrirToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.enregistrerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.zoomIn = new System.Windows.Forms.ToolStripButton();
@@ -51,6 +51,7 @@
             this.pause = new System.Windows.Forms.ToolStripButton();
             this.stop = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
+            this.PlayAll = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,7 @@
             this.collerToolStripButton,
             this.toolStripSeparator1,
             this.ToolStripButton,
+            this.PlayAll,
             this.play,
             this.pause,
             this.stop,
@@ -106,6 +108,11 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -130,11 +137,6 @@
             this.hScrollBar.Size = new System.Drawing.Size(759, 17);
             this.hScrollBar.TabIndex = 8;
             this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HScrollBar_Scroll);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // ouvrirToolStripButton
             // 
@@ -260,6 +262,16 @@
             this.export.Text = "Export Timeline";
             this.export.Click += new System.EventHandler(this.Export_Click);
             // 
+            // PlayAll
+            // 
+            this.PlayAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PlayAll.Image = global::VideoTapes.Properties.Resources.Run;
+            this.PlayAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PlayAll.Name = "PlayAll";
+            this.PlayAll.Size = new System.Drawing.Size(23, 22);
+            this.PlayAll.Text = "toolStripButton1";
+            this.PlayAll.Click += new System.EventHandler(this.PlayAll_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,5 +317,6 @@
         private System.Windows.Forms.ToolStripButton pause;
         private System.Windows.Forms.ToolStripButton stop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton PlayAll;
     }
 }

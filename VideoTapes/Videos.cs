@@ -20,7 +20,7 @@ namespace VideoTapes
         [StringLength(50)]
         public string Titre { get; set; }
         [StringLength(10)]
-        public string Mode { get; set; }
+        public string Codec { get; set; }
         [StringLength(50)]
         public string Periode { get; set; }
         [StringLength(255)]

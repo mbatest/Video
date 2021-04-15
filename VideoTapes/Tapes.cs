@@ -7,36 +7,33 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace VideoTapes
 {
     public partial class Tapes : Form
     {
         public static Modèle md;
+        public static string Disque;
         string BasePath = @"H:\Vidéos\DVRender";
-        string Disque;
         Videos currentVideotape;
         Videos currentSelection;
         List<Shots> shotsToPlay;
         int cutDelay;
-        Timer time = new Timer();
+        Timer timer = new Timer();
         Timer frameTimer = new Timer();
         Scenes currentScene;
-        List<Videos> nouvelles;
         int current = 0;
-        List<string> fichiers = new List<string>();
+        List<string> Medias = new List<string>();
         int curPos;
         int curTime;
-        public static List<Shots> nsh;
+        //public static List<Shots> nsh;
         /// <summary>
         /// Constructeur
         /// </summary>
         public Tapes()
         {
+            InitializeComponent();
             Disque = @"H:";
-            nouvelles = new List<Videos>();
-            nsh = new List<Shots>();
             if (!Directory.Exists(Disque))
             {
                 FolderBrowserDialog fdb = new FolderBrowserDialog();
@@ -48,17 +45,103 @@ namespace VideoTapes
                 }
                 else return;
             }
+            //nsh = new List<Shots>();
             md = new Modèle();
-            InitializeComponent();
             cutDelay = 2;
-            time.Interval = 1000;
-            time.Tick += Time_Tick;
+            timer.Interval = 1000;
+            timer.Tick += Time_Tick;
+            frameTimer.Interval = 1000;
             frameTimer.Tick += FrameTimer_Tick;
             int frtotal = md.Shots.Sum(s => s.FrameCount).Value;
-            global.Text = Videos.DuréeShot(frtotal);
+            global.Text = Videos.DuréeClipString(frtotal);
             sceneIndexControl.Init(md);
             dataSelector.Init(md);
             shotsToPlay = new List<Shots>();
+            //ValidationShots(7);
+            //List<int> codes = new List<int> {117        };
+            //foreach (int i in codes)
+            //    ValidationShots(i);
+            //List<Videos> videos = md.Videos.Where(c => c.Code_Bande > 64).ToList();
+            //foreach (Videos vid in videos)
+            //{
+            //    List<Shots> sc = vid.Shots.ToList();
+            //    if (sc.Count > 1)
+            //    {
+            //        if (sc[1].StartFrame == sc[0].EndFrame)
+            //        {
+            //            Console.WriteLine(vid.Code_Bande);
+            //        }
+            //    }
+            //}
+        }
+        private static void ValidationShots(int code)
+        {
+            Videos vid = md.Videos.Single(c => c.Code_Bande == code);
+            List<Shots> shots = vid.Shots.OrderBy(c => c.Fichier).ToList();
+            for (int i = 1; i < shots.Count; i++)
+            {
+                shots[i].StartFrame = shots[i - 1].EndFrame + 1;
+                shots[i].EndFrame = shots[i].StartFrame + shots[i].FrameCount;
+            }
+            List<Scenes> sc = vid.Scenes.ToList();
+            foreach (Scenes scenes in sc)
+            {
+                scenes.StartFrame = scenes.Start;
+                scenes.EndFrame = scenes.End;
+                scenes.NbSequences = scenes.SequenceScene.Count;
+            }
+            { }
+            if (vid.Codec == "dvsd")
+            {
+                //Fichiers DV sous J:\DVVideo
+                Analyse an = new Analyse(vid);
+            }
+            md.SaveChanges();
+
+            //    List<Shots> shotc = vid.Shots.Where(c => c.Commentaire == scenes.Commentaire).ToList(); 
+            //    foreach(Shots s in shotc)
+            //    {
+            //        SequenceScene sed = new SequenceScene { Scenes = scenes, Shots = s };
+            //        scenes.SequenceScene.Add(sed);
+
+            //    }
+            //List<Videos> videos = md.Videos.ToList();
+            //foreach (Videos video in videos)
+            //{
+            //    int nbShots = video.Scenes.OrderBy(d => d.Code_Scene).ToList().Sum(c => c.SequenceScene.Count);
+            //    if (nbShots != video.NombreShots)
+            //    {
+            //        Console.WriteLine("Problème : " + video.Code_Bande.ToString() + " Ordre " + video.Ordre + " Trouvé " + nbShots.ToString() + " Enregistré " + video.NombreShots.ToString());
+            //        foreach (Scenes s in video.Scenes)
+            //        {
+            //            {
+            //                Console.WriteLine(s.Code_Bande + " " + s.Code_Scene + " " + s.Commentaire + " " + s.SequenceScene.Count);
+            //            }
+            //        }
+            //    }
+            //    foreach (Scenes s in video.Scenes)
+            //    {
+            //        if (s.SequenceScene.Count == 0)
+            //        {
+            //            Console.WriteLine(s.Code_Bande + " " + s.Code_Scene + " " + s.Commentaire + " " + s.Titre);
+            //        }
+            //    }
+            //}
+            //Videos videos = md.Videos.Single(c => c.Code_Bande == 37 /*27*/);
+            //Scenes sce = sc.Last();
+            //foreach (SequenceScene seq in sce.SequenceScene)
+            //{
+            //    Shots s = seq.Shots;
+            //    string end = s.FichierImage.Substring(s.FichierImage.IndexOf("3",0));
+            //    string m = @"D:\VideoThumbs\2007\" + end;
+            //    Image im = Image.FromFile(m);
+            //    using (var ms = new MemoryStream())
+            //    {
+            //        im.Save(ms, im.RawFormat);
+            //        s.Image = ms.GetBuffer();
+            //    }
+            //}
+            //md.SaveChanges();
         }
         private void Tapes_Load(object sender, EventArgs e)
         {
@@ -70,6 +153,7 @@ namespace VideoTapes
                 {
                     BasePath = fdg.SelectedPath;
                 }
+                else { return; }
             }
         }
         private void Analyse(Videos video, string videoName)
@@ -100,7 +184,7 @@ namespace VideoTapes
             md.get_StreamLength(out double x);
             md.get_FrameRate(out double frRate);
             var frameCount = (int)(x * 25);
-            return new Shots { Videos = item, Fichier = f, StartFrame = 0, Codec = "AVC", DateShot = ff.LastWriteTime, EndFrame = frameCount, FrameCount = frameCount };
+            return new Shots { Videos = item, Fichier = f, StartFrame = 0, Codec = "AVCHD", DateShot = ff.LastWriteTime, EndFrame = frameCount, FrameCount = frameCount };
         }
         private void CutIntoScenes(Videos currentVideoTape)
         {
@@ -153,7 +237,7 @@ namespace VideoTapes
         }
         private void PlayShots()
         {
-            fichiers.Clear();
+            Medias.Clear();
             var u = axWindowsMediaPlayer.playlistCollection.newPlaylist("Playlist1");
             timeLine.CurrentPosition = 0;
             foreach (Shots currentShot in shotsToPlay)
@@ -169,12 +253,17 @@ namespace VideoTapes
                 }
                 if (!file.Contains(BasePath))
                     file = BasePath + file;
-                fichiers.Add(file);
-                IWMPMedia video = axWindowsMediaPlayer.newMedia(file);
+                Medias.Add(file);
+                WMPLib.IWMPMedia video = axWindowsMediaPlayer.newMedia(file);
                 u.appendItem(video);
             }
             current = 0;
             shotsToPlay.ForEach(s => { s.Current = false; s.Selected = false; });
+            timeLine.CurrentPosition = 0;
+            timeLine.CurrentTime = 0;
+            timer.Start();
+            frameTimer.Enabled = true;
+            frameTimer.Start();
             Play();
             //   axWindowsMediaPlayer.currentPlaylist = u;
             //if (current >= fichiers.Count)
@@ -196,15 +285,15 @@ namespace VideoTapes
             //axWindowsMediaPlayer.currentPlaylist.URL = fichiers[current];
             //axWindowsMediaPlayer.Ctlcontrols.play();
         }
-        private void timeLine_Pause(object sender, PlayerArgs e)
+        #region Evénements
+        private void TimeLine_Pause(object sender, PlayerArgs e)
         {
             axWindowsMediaPlayer.Ctlcontrols.pause();
         }
-        private void timeLine_Stop(object sender, PlayerArgs e)
+        private void TimeLine_Stop(object sender, PlayerArgs e)
         {
             axWindowsMediaPlayer.Ctlcontrols.stop();
         }
-        #region Evénements
         private void FrameTimer_Tick(object sender, EventArgs e)
         {
             timeLine.CurrentPosition++;
@@ -214,7 +303,7 @@ namespace VideoTapes
         private void Time_Tick(object sender, EventArgs e)
         {
             Play();
-            time.Enabled = false;
+            timer.Enabled = false;
         }
         private void Videos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -224,20 +313,14 @@ namespace VideoTapes
             axWindowsMediaPlayer.Ctlcontrols.stop();
             timeLine.CurrentPosition = 0;
             #region Show tape data 
-            foreach (Control c in splitContainer6.Panel1.Controls)
-            {
-                if (c is TextBox)
-                    c.Text = "";
-            }
             Cursor = Cursors.WaitCursor;
+            splitContainerDétailsVidéo.Panel1.Controls.OfType<TextBox>().ToList().ForEach(c => c.Text = "");
             bdComment.Text = currentVideotape.Commentaire;
             bdPeriode.Text = currentVideotape.Periode;
             bdTitreFichier.Text = currentVideotape.Directory;
             bdTitreBande.Text = currentVideotape.Titre;
             if ((currentVideotape.NombreFrames == null) | (currentVideotape.NombreFrames == 0))
             {
-                //Cursor = Cursors.Default;
-                //return;
                 currentVideotape.NombreFrames = currentVideotape.Frames;
                 md.SaveChanges();
                 if (currentVideotape.NombreShots == null)
@@ -253,26 +336,35 @@ namespace VideoTapes
             bdDuration.Text = currentVideotape.Durée;
             bdFrames.Text = currentVideotape.NombreFrames?.ToString();
             local.Text = currentVideotape.Shots.Count + " clips, " + currentVideotape.Durée;
+            local.ForeColor = Color.Red;
             #endregion
-            #region Paramètres
-            if (currentVideotape.Mode == "dvsd")
-            {
-                BasePath = Disque + @"\Vidéos\DVRender SD\";
-            }
-            else
-            {
-                BasePath = Disque + @"\Vidéos\HDWRITER\";
-            }
-            #endregion
-            Cursor = Cursors.WaitCursor;
+       //     SetCodec();
+            BasePath = currentVideotape.BasePath();
             displayScenesPanel.Init(currentVideotape);
             timeLine.Init(currentVideotape);
+            frameTimer.Stop();
+            curTime = 0;
             currentScene = currentVideotape.Scenes.First();
             sceneIndexControl.SetScene(currentScene);
             timeLine.SetStart(currentScene);
             Cursor = Cursors.Default;
             return;
         }
+
+        private void SetCodec()
+        {
+            BasePath = currentVideotape.BasePath();
+            //switch (currentVideotape.Codec)
+            //{
+            //    case "dvsd":
+            //        BasePath = Disque + @"\Vidéos\DVRender\";
+            //        break;
+            //    case "AVCHD":
+            //        BasePath = Disque + @"\Vidéos\HDWRITER\";
+            //        break;
+            //}
+        }
+
         private void SceneIndexControl_SceneInfoChanged(object sender, SceneSelectedArgs e)
         {
             Scenes sc = e.scene;
@@ -293,7 +385,7 @@ namespace VideoTapes
                         Scenes scene = e.scenes[i];
                         foreach (var x in scene.SequenceScene)
                         {
-                            sceneModèle.AddShotToScene(x.Shots);
+                            sceneModèle.AddShot(x.Shots);
                         }
                         try
                         {
@@ -327,7 +419,7 @@ namespace VideoTapes
                     shotsToPlay.Clear();
                     foreach (Scenes scene in e.scenes)
                     {
-                        foreach (SequenceScene y in scene.SequenceScene)
+                        foreach (SequenceScene y in scene.SequenceScene.OrderBy(c => c.Shots.Fichier))
                         {
                             shotsToPlay.Add(y.Shots);
                             y.Shots.Selected = true;
@@ -343,7 +435,7 @@ namespace VideoTapes
                         {
                             foreach (KeywordScene y in sceneModèle.KeywordScene)
                             {
-                                e.scenes[i].AddKeywordToScene(y.Keywords);
+                                e.scenes[i].AddKeyword(y.Keywords);
                             }
                         }
                     md.SaveChanges();
@@ -356,7 +448,7 @@ namespace VideoTapes
                         {
                             foreach (PrésenceScène y in sceneModèle.PrésenceScène)
                             {
-                                e.scenes[i].AddPersonToScene(y.Personnes);
+                                e.scenes[i].AddPerson(y.Personnes);
                             }
                         }
                     md.SaveChanges();
@@ -397,6 +489,7 @@ namespace VideoTapes
         {
             if (e.Shots != null)
             {
+                curTime = 0;
                 shotsToPlay = e.Shots;
                 PlayShots();
             }
@@ -408,7 +501,7 @@ namespace VideoTapes
         private void DisplayScenesPanel_SceneSelected(object sender, SceneSelectedArgs e)
         {
             currentScene = e.scene;
-            var sq = currentScene.SequenceScene;
+            var sq = currentScene.SequenceScene.OrderBy(c=>c.Shots.Fichier);
             currentVideotape.Shots.ToList().ForEach(s => s.Selected = false);
             sceneIndexControl.SetScene(e.scene);
             #region Sélectionne les clips
@@ -419,7 +512,7 @@ namespace VideoTapes
                 shotsToPlay.Add(y.Shots);
             }
             //if (détails.Checked)
-            //    PlayShots();
+            PlayShots();
             #endregion
             timeLine.SetStart(currentScene);
         }
@@ -464,7 +557,7 @@ namespace VideoTapes
                 {
                     string folder = fol + @"\PRIVATE\AVCHDL\BDMV\STREAM";
                     string[] files = Directory.GetFiles(folder, "*.m2ts");
-                    Videos vid = new Videos { Periode = an, Titre = Path.GetFileNameWithoutExtension(fol), Directory = fol, Hauteur = 1080, Largeur = 1920, Mode = "AVC" };
+                    Videos vid = new Videos { Periode = an, Titre = Path.GetFileNameWithoutExtension(fol), Directory = fol, Hauteur = 1080, Largeur = 1920, Codec = "AVC" };
                     foreach (string f in files)
                     {
                         Shots shot = ShotFromFile(f, vid); // new Shots { Videos = vid, Fichier = f };
@@ -491,17 +584,17 @@ namespace VideoTapes
         }
         private void CouperToolStripButton_Click(object sender, EventArgs e)
         {
-            if (currentVideotape == null)
-                return;
-            currentVideotape.Scenes.Clear();
-            CutIntoScenes(currentVideotape);
-            displayScenesPanel.Init(currentVideotape);
-            displayScenesPanel.Refresh();
-            bdNumberOfScenes.Text = currentVideotape.Scenes.Count.ToString();
+            if (currentVideotape != null)
+            {
+                currentVideotape.Scenes.Clear();
+                CutIntoScenes(currentVideotape);
+                displayScenesPanel.Init(currentVideotape);
+                bdNumberOfScenes.Text = currentVideotape.Scenes.Count.ToString();
+            }
         }
         private void Détails_Click(object sender, EventArgs e)
         {
-            displayScenesPanel.Détails = détails.Checked;
+            DisplayScenesPanel.Détails = détails.Checked;
             displayScenesPanel.Refresh();
         }
         private void ZoomIn_Click(object sender, EventArgs e)
@@ -529,35 +622,31 @@ namespace VideoTapes
         #endregion
         private void DisplayScenesPanel_Resize(object sender, EventArgs e) => displayScenesPanel.Refresh();
         #region Recherche
-        private void DataSelector1_LieuxSelected(object sender, LieuxSelectedArgs e)
+        private void DataSelector_LieuxSelected(object sender, LieuxSelectedArgs e)
         {
             var scenes = md.Scenes.Where(s => s.Lieux.Code_Lieu == e.Lieu.Code_Lieu);
             scenes = scenes.Where(s => s.SequenceScene.Count > 0);
-            if (scenes.Count() == 0)
-            {
-
-            }
-            else
+            if (scenes.Count() >= 0)
             {
                 DisplayScenes(scenes.ToList(), e.Lieu.ToString());
             }
         }
 
-        private void DataSelector1_PersonneSelected(object sender, PersonneSelectedArgs e)
+        private void DataSelector_PersonneSelected(object sender, PersonneSelectedArgs e)
         {
             List<Scenes> scenes = new List<Scenes>();
             md.PrésenceScene.Where(ps => ps.Personnes.Code == e.Personne.Code & ps.Scenes.Videos != null).ToList().ForEach(sc => scenes.Add(sc.Scenes));
             DisplayScenes(scenes, e.Personne.ToString());
         }
 
-        private void DataSelector1_KeywordsSelected(object sender, KeywordSelectedArgs e)
+        private void DataSelector_KeywordsSelected(object sender, KeywordSelectedArgs e)
         {
             List<Scenes> scenes = new List<Scenes>();
             md.KeywordScene.Where(ps => ps.Keywords.Code_Keyword == e.KwChoosen.Code_Keyword).ToList().ForEach(sc => scenes.Add(sc.Scenes));
             DisplayScenes(scenes, e.KwChoosen.Keyword);
         }
 
-        private void DataSelector1_DateSelected(object sender, DateSelectedArgs e)
+        private void DataSelector_DateSelected(object sender, DateSelectedArgs e)
         {
             DateTime début = e.BeginDate;
             DateTime Fin = e.EndDate;
@@ -565,7 +654,6 @@ namespace VideoTapes
             scenes = md.Scenes.Where(ps => ps.DateDebut >= e.BeginDate & ps.DateDebut <= e.EndDate).ToList();
             DisplayScenes(scenes, e.BeginDate.ToShortDateString() + "-" + e.EndDate.ToShortDateString());
         }
-        #endregion
         private void DisplayScenes(List<Scenes> scenes, string clé)
         {
             displayScenesPanel.Init(scenes.ToList(), clé);
@@ -574,11 +662,15 @@ namespace VideoTapes
             {
                 Scenes = scenes.ToList()
             };
+            if(clé!=null)
+            {
+                currentVideotape.Titre = clé;
+            }
             if (shotsToPlay != null)
                 shotsToPlay.Clear();
             else shotsToPlay = new List<Shots>();
             foreach (Scenes x in scenes)
-                foreach (SequenceScene sq in x.SequenceScene)
+                foreach (SequenceScene sq in x.SequenceScene.OrderBy(c=>c.Shots.Fichier))
                 {
                     currentVideotape.Shots.Add(sq.Shots);
                     shotsToPlay.Add(sq.Shots);
@@ -591,12 +683,13 @@ namespace VideoTapes
             bdDuration.Text = currentVideotape.Durée;
             bdFrames.Text = currentVideotape.Frames.ToString();
         }
+        #endregion
         #region Media Player
         private void Play()
         {
-            if (current >= fichiers.Count)
+            if (current >= Medias.Count)
                 return;
-            toolStripLabel.Text = fichiers[current];
+            toolStripLabel.Text = Medias[current];
             shotsToPlay.ForEach(s => s.Current = false);
             shotsToPlay[current].Current = true;
             if (timeLine.CurrentPosition * 5 > timeLine.Width / 2)
@@ -604,13 +697,11 @@ namespace VideoTapes
                 timeLine.SetStart(shotsToPlay[current]);
                 timeLine.CurrentPosition = 0;
             }
-            frameTimer.Enabled = true;
-            frameTimer.Interval = 1000;
+            frameTimer.Start();
             timeLine.CurrentTime = (int)shotsToPlay[current].StartFrame / 25;// curPos;
             timeLine.CurrentPosition += timeLine.CurrentTime - curTime;// (int)shotsToPlay[current].StartFrame / 25;// curPos;
             timeLine.Refresh();
-            frameTimer.Start();
-            axWindowsMediaPlayer.URL = fichiers[current];
+            axWindowsMediaPlayer.URL = Medias[current];
             axWindowsMediaPlayer.Ctlcontrols.play();
         }
         private void AxWindowsMediaPlayer_CurrentItemChange(object sender, AxWMPLib._WMPOCXEvents_CurrentItemChangeEvent e)
@@ -618,14 +709,9 @@ namespace VideoTapes
             var x = axWindowsMediaPlayer.currentMedia.name;
             SelectFromName(x);
             timeLine.Refresh();
-            Console.WriteLine(x);
+   //         Console.WriteLine(x);
         }
-        private void SelectFromName(string name)
-        {
-            shotsToPlay.ForEach(c => c.Selected = false);
-            shotsToPlay.ForEach(c => c.Current = false);
-            shotsToPlay.Single(c => c.Fichier.Contains(name)).Current = true;
-        }
+
         private void AxWindowsMediaPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
             switch ((PlayerEvents)e.newState)
@@ -647,8 +733,8 @@ namespace VideoTapes
                 case PlayerEvents.Waiting://7
                     break;
                 case PlayerEvents.Media_Ended: // 8:
-                    time.Enabled = true;
-                    time.Start();
+                    timer.Enabled = true;
+                    timer.Start();
                     frameTimer.Stop();
                     curPos = timeLine.CurrentPosition;
                     curTime = timeLine.CurrentTime;
@@ -656,7 +742,6 @@ namespace VideoTapes
                     break;
                 case PlayerEvents.Transitioning://9
                     break;
-
                 case PlayerEvents.Ready://10
                     break;
                 case PlayerEvents.Reconnecting://11
@@ -666,6 +751,13 @@ namespace VideoTapes
                 default:
                     break;
             }
+        }
+        private void SelectFromName(string name)
+        {
+            shotsToPlay.ForEach(c => c.Selected = false);
+            shotsToPlay.ForEach(c => c.Current = false);
+            var x = shotsToPlay.FirstOrDefault(c => c.Fichier.Contains(name));
+            if (x != null) x.Current = true;
         }
         #endregion
         private void Videos_DataSourceChanged(object sender, EventArgs e)
@@ -679,7 +771,7 @@ namespace VideoTapes
         {
             // axWindowsMediaPlayer.close();
             pleinEcran.Controls.Remove(axWindowsMediaPlayer);
-            this.splitContainer7.Panel2.Controls.Add(this.axWindowsMediaPlayer);
+            this.splitContainerScenes.Panel2.Controls.Add(this.axWindowsMediaPlayer);
         }
         private void Fullscreen_CheckedChanged(object sender, EventArgs e)
         {
@@ -708,12 +800,17 @@ namespace VideoTapes
             }
         }
         #endregion
-        private void imprimerToolStripButton_Click(object sender, EventArgs e)
+        private void searchScene_Click(object sender, EventArgs e)
         {
+            if(int.TryParse(sceneNumber.Text, out int number))
+            {
+                Scenes scene = md.Scenes.FirstOrDefault(s => s.Code_Scene == number);
+                if(scene!=null)
+                {
 
+                }
+            }
         }
-
-
     }
     enum PlayerEvents
     {

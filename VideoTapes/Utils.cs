@@ -3,158 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VideoTapes
 {
-    public class Utils
+    public partial class Utils
     {
-        private static string thumbsDirectory;
-        private static string defaultDataBase;
-        private static string diskBase;
-        private static string hdBase;
-        private static string connectionString;
-        private static string currentCountry;
-        #region Properties
-        public static ImageCodecInfo jgpEncoder;
-        public static EncoderParameters encoderParameters;
-        public static Dictionary<string, string> parameters;
-        public static string ThumbsDirectory
-        {
-            get
-            {
-                parameters.TryGetValue("[ThumbsDirectory]", out thumbsDirectory);
-                return thumbsDirectory;
-            }
-            set { Utils.thumbsDirectory = value; }
-        }
-        public static string DefaultDataBase
-        {
-            get
-            {
-                parameters.TryGetValue("[DefaultDataBase]", out defaultDataBase);
-                return Utils.defaultDataBase;
-            }
-            set { Utils.defaultDataBase = value; }
-        }
-        public static string DiskBase
-        {
-            get
-            {
-                parameters.TryGetValue("[DiskBase]", out diskBase);
-                return Utils.diskBase;
-            }
-            set { Utils.diskBase = value; }
-        }
-        public static string HDBase
-        {
-            get
-            {
-                parameters.TryGetValue("[HDBase]", out hdBase);
-                return Utils.hdBase;
-            }
-            set { Utils.hdBase = value; }
-        }
-        public static string ConnectionString
-        {
-            get
-            {
-                parameters.TryGetValue("[ConnectionString]", out connectionString);
-                return Utils.connectionString;
-            }
-            set { Utils.connectionString = value; }
-        }
-        public static string CurrentCountry
-        {
-            get
-            {
-                parameters.TryGetValue("[CurrentCountry]", out currentCountry);
-                return Utils.currentCountry;
-            }
-            set { Utils.currentCountry = value; }
-        }
-        public static Color vid_color = Color.LightYellow;
-        public static Color aud_color = Color.LightBlue;
-        public static Color trans_color = Color.LightGray;
-        #endregion
-        public static void SetEncoding()
-        {
-            jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-            // Create an Encoder object based on the GUID
-            // for the Quality parameter category.
-            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-            // Create an EncoderParameters object.
-            // An EncoderParameters object has an array of EncoderParameter
-            // objects. In this case, there is only one
-            // EncoderParameter object in the array.
-            encoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 75L);
-            encoderParameters.Param[0] = myEncoderParameter;
-        }
-        public static ImageCodecInfo GetEncoder(ImageFormat format)
-        {
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                {
-                    return codec;
-                }
-            }
-            return null;
-        }
-        public static bool SetDefaults()
-        {
-            ReadParams();
-            SetEncoding();
-            return true;
-        }
-        public static void SaveParams()
-        {
-            StreamWriter sw = new StreamWriter("VideoIndex.Ini");
-            foreach (string k in parameters.Keys)
-            {
-                sw.WriteLine(k);
-                string data;
-                parameters.TryGetValue(k, out data);
-                sw.WriteLine(data);
-            }
-            sw.Close();
-        }
-        public static void ReadParams()
-        {
-            string iniName = "VideoIndex.Ini";
-            if (!File.Exists(iniName))
-            {
-                OpenFileDialog opfd = new OpenFileDialog();
-                if (opfd.ShowDialog() == DialogResult.OK)
-                {
-                    iniName = opfd.FileName;
-                }
-                else
-                {
-                    ThumbsDirectory = @"E:\VideoThumbs\";
-                    DefaultDataBase = "Videos V2.mdb";
-                    DiskBase = @"G:\DVVideo\";
-                    HDBase = @"G:\HDWRITER";
-                    ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=";
-                    CurrentCountry = "France";
-                    return;
-                }
-            }
-            StreamReader sp = new StreamReader(iniName);
-            parameters = new Dictionary<string, string>();
-            while (!sp.EndOfStream)
-            {
-                string key = sp.ReadLine();
-                string data = sp.ReadLine();
-                parameters.Add(key, data);
-            }
-            sp.Close();
-        }
         #region Time units
         /// <summary>
         /// Number of MilliSeconds in a second.
@@ -185,6 +39,77 @@ namespace VideoTapes
         /// </remarks>
         public const long PALUNITS = (UNITS / 25);      // 10 ^ 7
         #endregion
+        /// <summary>
+        /// Necessary for DV frames
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        public static DateTime[] ComputeCodeAndStampFrame(byte[] data, int start)
+        {
+            DateTime[] result = new DateTime[2];
+            if ((data[start] == 0x62) && (data[start + 5] == 0x63))
+            {
+                int a1 = 0;
+                int a2 = 0;
+                //Day
+                a1 = (int)data[start + 2] & 0x0F;
+                a2 = ((int)data[start + 2] & 0x30) / 16;
+                int jour = 10 * a2 + a1;
+                a1 = (int)data[start + 3] & 0x0F;
+                a2 = ((int)data[start + 3] & 0x10) / 16;
+                // Month
+                int mois = 10 * a2 + a1;
+                a1 = (int)data[start + 4] & 0x0F;
+                a2 = ((int)data[start + 4] & 0x30) / 16;
+                int an = 10 * a2 + a1;
+                if (an < 30) an += 2000;
+                // Hour
+                a1 = (int)data[start + 9] & 0x0F;
+                a2 = ((int)data[start + 9] & 0x30) / 16;
+                int hour = 10 * a2 + a1;
+                // Minutes
+                a1 = (int)data[start + 8] & 0x0F;
+                a2 = ((int)data[start + 8] & 0x70) / 16;
+                int min = 10 * a2 + a1;
+                // Seconds
+                a1 = (int)data[start + 7] & 0x0F;
+                a2 = ((int)data[start + 7] & 0x70) / 16;
+                int sec = 10 * a2 + a1;
+                // Frames
+                a1 = (int)data[start + 6] & 0x0F;
+                a2 = ((int)data[start + 6] & 0x30) / 16;
+                int millis = (10 * a2 + a1) * 40;
+                result[0] = new DateTime(an, mois, jour, hour, min, sec);
+            }
+            else
+            {
+                result[0] = DateTime.MinValue;
+            }
+            int debut = start - 0x15C;
+            if (data[debut] == 0x13)
+            {
+                int[] d = new int[9];
+                d[1] = (int)data[debut + 1] & 0x0F;
+                d[2] = ((int)data[debut + 1] & 0x30) / 16;
+                d[3] = (int)data[debut + 2] & 0x0F;
+                d[4] = ((int)data[debut + 2] & 0x70) / 16;
+                d[5] = (int)data[debut + 3] & 0x0F;
+                d[6] = ((int)data[debut + 3] & 0x70) / 16;
+                d[7] = (int)data[debut + 4] & 0x0F;
+                d[8] = ((int)data[debut + 4] & 0x30) / 16;
+                int h = 10 * d[8] + d[7];
+                int m = 10 * d[6] + d[5];
+                int s = 10 * d[4] + d[3];
+                int f = 10 * d[2] + d[1];
+                result[1] = new DateTime(1, 1, 1, h, m, s, f * 40);
+            }
+            else
+            {
+                result[1] = DateTime.MinValue;
+            }
+            return result;
+        }
         #region Utility functions
         public static string ToTime(double f)
         {
@@ -197,15 +122,14 @@ namespace VideoTapes
             if (dur > 3599)
             {
                 hour = dur / 3600;
-                dur = dur - hour * 3600;
+                dur -= hour * 3600;
             }
             if (dur > 59)
             {
                 mn = dur / 60;
-                dur = dur - mn * 60;
+                dur -= mn * 60;
             }
             double le = f - hour * 3600 - mn * 60 - dur;
-            double frame = le / AvgTimeFrame;
             double fps = 1 / AvgTimeFrame;
             return "T" + hour.ToString("00") + ":" + mn.ToString("00") + ":" + dur.ToString("00")
                 + ":" + fr.ToString("00") + "F" + fps.ToString("00");
@@ -218,12 +142,12 @@ namespace VideoTapes
             if (dur > 3599)
             {
                 hour = dur / 3600;
-                dur = dur - hour * 3600;
+                dur -= hour * 3600;
             }
             if (dur > 59)
             {
                 mn = dur / 60;
-                dur = dur - mn * 60;
+                dur -= mn * 60;
             }
             double le = f - hour * 3600 - mn * 60 - dur;
             double frame = le / AvgTimeFrame;
@@ -236,7 +160,7 @@ namespace VideoTapes
             string ret = "";
             for (int i = 0; i < c.Length; i++)
             {
-                ret = ret + (char)c[i];
+                ret += (char)c[i];
             }
             return ret;
         }
@@ -245,7 +169,7 @@ namespace VideoTapes
             string ret = "";
             for (int i = 0; i < c.Length; i++)
             {
-                ret = ret + c[i].ToString("x2");
+                ret += c[i].ToString("x2");
             }
             return ret;
         }
@@ -259,6 +183,6 @@ namespace VideoTapes
             return taille;
         }
         #endregion
-    }     /// <summary
+    }    
 
 }

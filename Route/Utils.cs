@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Route
 {
@@ -204,10 +200,8 @@ namespace Route
                 CreateStream();
                 SetOptions();
             }
-
             BitmapData bmpDat = bmp_.LockBits(
                 new Rectangle(0, 0, (int)width_, (int)height_), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
             int hr = AVIStreamWrite(psCompressed_, count_, 1,
                 bmpDat.Scan0, // pointer to data
                 (Int32)(stride_ * height_),

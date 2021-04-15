@@ -32,7 +32,7 @@ namespace VideoTapes
         List<float> shotsWidth;
         public int CurrentPosition { get; set; }
         public int CurrentTime { get; set; }
-
+        Videos currentVideo;
         #endregion
         public TimeLine()
         {
@@ -45,6 +45,7 @@ namespace VideoTapes
         public void Init(Videos video)
         {
             trackHeight = 90;
+            currentVideo = video;
             pixelsParSecondes = 5; // 1 pixel pour 5 frames, soit 5 pixels pour 1 seconde
             shots = video.Shots/*.OrderBy(s => s.DateShot)               .ThenBy(s => s.StartFrame)*/.ToList();
             shotsWidth = new List<float>();
@@ -61,6 +62,11 @@ namespace VideoTapes
             débutDessin = 0;
             hScrollBar.Maximum = (int)(LongueurTimeline / pixelsParSecondes);
             toolStripStatusLabel1.Text = "";
+            CurrentTime = 0;
+            CurrentPosition = 0;
+            currentScene = video.Scenes.OrderBy(c => c.StartFrame).First();
+            débutDessin = 0;
+            SetStart(currentScene);
             Refresh();
         }
         public void SetStart(Scenes scene)
@@ -74,7 +80,7 @@ namespace VideoTapes
                 {
                     if (s == shot)
                     {
-                        débutDessin = -début;
+                        débutDessin = +(int)shot.StartFrame;
                         break;
                     }
                     début += (int)s.FrameCount / pixelsParSecondes;
@@ -116,7 +122,7 @@ namespace VideoTapes
             #endregion
             int totalFrame = 0;
             #region Affichage shots
-            foreach (Shots s in shots)
+            foreach (Shots s in shots.OrderBy(c=>c.Fichier))
             {
                 float largeurClipCourant = (int)s.FrameCount / pixelsParSecondes;
                 RectangleF rect = new RectangleF(débutVignette, new System.Drawing.SizeF(largeurClipCourant, trackHeight));
@@ -134,9 +140,11 @@ namespace VideoTapes
                 totalFrame += (int)s.FrameCount;
             }
             #endregion
+            #region Affiche le curseur
             e.Graphics.DrawLine(Pens.Black, new PointF(CurrentPosition * pixelsParSecondes, topTrack), new PointF(CurrentPosition * pixelsParSecondes, topTrack + trackHeight + 35));
             string temps = (CurrentTime / 60).ToString("d2") + ":" + (CurrentTime % 60).ToString("d2");
             e.Graphics.DrawString(temps, new Font("Arial", 8), Brushes.Black, new PointF(CurrentPosition * pixelsParSecondes, topTrack + trackHeight + 35));
+            #endregion
             #region Graduation
             ligneGraduation = topTrack + trackHeight + 35;
             e.Graphics.DrawLine(Pens.Black, 0, ligneGraduation, Width, ligneGraduation);
@@ -223,7 +231,6 @@ namespace VideoTapes
                 }
                 startPoint.X += shotsWidth[i];
             }
-
         }
         private void TimeLine_MouseMove(object sender, MouseEventArgs e)
         {
@@ -283,12 +290,13 @@ namespace VideoTapes
             débutDessin = 0;
             if (currentScene != null)
             {
-                currentScene.SequenceScene.ToList().ForEach(c => sh.Add(c.Shots));
+                currentScene.SequenceScene.OrderBy(c=>c.Shots.Fichier).ToList().ForEach(c => sh.Add(c.Shots));
+                CurrentPosition = (int) sh.OrderBy(c => c.StartFrame).First().StartFrame/25;
                 ShotSelected?.Invoke(this, new ShotSelectedArgs { Shots = sh });
             }
             else
             {
-                ShotSelected?.Invoke(this, new ShotSelectedArgs { Shots = shots });
+                ShotSelected?.Invoke(this, new ShotSelectedArgs { Shots = currentVideo.Shots.ToList() });
             }
         }
         private void Pause_Click(object sender, EventArgs e)
@@ -297,7 +305,7 @@ namespace VideoTapes
         }
         private void Stop_Click(object sender, EventArgs e)
         {
-            Pause?.Invoke(this, new PlayerArgs { Pause = false, Stop = true });
+            Stop?.Invoke(this, new PlayerArgs { Pause = false, Stop = true });
         }
         private void CouperToolStripButton_Click(object sender, EventArgs e)
         {
@@ -315,7 +323,6 @@ namespace VideoTapes
                 StreamWriter sw = new StreamWriter(fileExport);
                 foreach (Shots u in shotsSD)
                 {
-
                     sw.Write(@"H:\Vidéos\DVRender\" + u.Fichier.Replace("avi", "mpg"));
                     if (u.Lieux != null)
                     {
@@ -329,15 +336,15 @@ namespace VideoTapes
                 }
                 sw.Close();
             }
-            List<Shots> shotsHD = shots.Where(c => c.Codec == "AVC").ToList();
+            List<Shots> shotsHD = shots.Where(c => c.Codec == "AVCHD").ToList();
             if (shotsHD.Count > 0)
             {
                 string fileExportHD = @"D:\Shots HD avec " + description + ".txt";
                 StreamWriter swhd = new StreamWriter(fileExportHD);
                 foreach (Shots u in shotsHD)
                 {
-                    if (!u.Fichier.Contains("HDWRITER"))
-                        u.Fichier = @"H:\Vidéos\HDWRITER\" + u.Fichier;
+                    //if (!u.Fichier.Contains("HDWRITER"))
+                    //    u.Fichier = @"H:\Vidéos\HDWRITER\" + u.Fichier;
                     swhd.Write(u.Fichier.Replace("G:", "H:"));
                     if (u.Lieux != null)
                     {
@@ -352,6 +359,11 @@ namespace VideoTapes
                 }
                 swhd.Close();
             }
+        }
+
+        private void PlayAll_Click(object sender, EventArgs e)
+        {
+            ShotSelected?.Invoke(this, new ShotSelectedArgs { Shots = currentVideo.Shots.ToList() });
         }
     }
 }

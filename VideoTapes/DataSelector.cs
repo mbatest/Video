@@ -67,6 +67,7 @@ namespace VideoTapes
             .ToList()
             .ForEach(l => paysLieux.Items.Add(l));
         }
+        #endregion 
         private void SelectLieu_Click(object sender, EventArgs e)
         {
             LieuxSelected?.Invoke(this, new LieuxSelectedArgs {Lieu = (Lieux)paysLieux.SelectedItem });
@@ -75,18 +76,15 @@ namespace VideoTapes
         {
             PersonneSelected?.Invoke(this, new PersonneSelectedArgs { Personne = (Personne)Personnes.SelectedItem });
         }
-        #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private void selectDate_Click(object sender, EventArgs e)
         {
             DateSelected?.Invoke(this, new DateSelectedArgs { BeginDate = beginPicker.Value, EndDate = endPicker.Value });
         }
-
         private void searchKeywords_Click(object sender, EventArgs e)
         {
             KeywordsSelected?.Invoke(this, new KeywordSelectedArgs { KwChoosen = (Keywords)keywordList.SelectedItem });
         }
-
         private void beginPicker_ValueChanged(object sender, EventArgs e)
         {
             endPicker.Value = beginPicker.Value;

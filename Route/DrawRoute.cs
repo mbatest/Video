@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AxWMPLib;
 
 namespace Route
 {
     public partial class DrawRoute : Form
     {
         List<RouteStep> listeEtapes = new List<RouteStep>();
-        public string ImPath;
+        public string cheminImage;
         public string vidPath;
         public float zoomFactor = 1F;
         public float vStretchFactor = 1;
@@ -29,12 +25,12 @@ namespace Route
         int vidLength = 100;
         int currentWidth = 2;
         int movLength = 4;
-        RouteStep curEt = null;
+        RouteStep etapeCourante = null;
         Size DVD = new Size(720, 576);
         Size FullHD = new Size(1920, 1080);
         Size HalfHD = new Size(1488, 720);
         Image curMap;
-        Image curImage;
+        Image imageCourante;
         Image curShow;
         Image curIcone;
         Bitmap ico;
@@ -42,12 +38,10 @@ namespace Route
         float zoomChange = 1.2F;
         bool isRecording = false;
         string currentFile = "";
-        AxWMPLib.AxWindowsMediaPlayer mediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+        //AxWindowsMediaPlayer MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
         public DrawRoute()
         {
             InitializeComponent();
-            
-            //labFont.Visible = true;
             this.SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
@@ -58,22 +52,14 @@ namespace Route
             aVCHD1920X1080ToolStripMenuItem.Checked = false;
             movieType.Text =dVD720X576ToolStripMenuItem.Text;
             movieLength.Value = movLength;
-            System.Resources.ResourceManager rm = Properties.Resources.ResourceManager;
             ico = (Bitmap)Properties.Resources.Voiture46108;
             mediaPlayer.Visible = false;
             //ShowControls(false);
             drawRecord.Controls.Add(mediaPlayer);
             mediaPlayer.Dock = DockStyle.Fill;
+            mediaPlayer.Visible = false;
         }
         #region Painting panels
-        private void DrawRecord_Paint(object sender, PaintEventArgs e)
-        {
-            Size DrawSize = new Size((int)(videoSize.Width * zoomFactor), (int)(videoSize.Height * zoomFactor));
-            if (isRecording)
-            {
-                e.Graphics.DrawImage(curShow, 0, 0, DrawSize.Width, DrawSize.Height);
-            }
-        }
         private void DrawPanel_Paint(object sender, PaintEventArgs e)
         {
             Size DrawSize = new Size((int)(videoSize.Width * zoomFactor), (int)(videoSize.Height * zoomFactor));
@@ -83,7 +69,7 @@ namespace Route
                 if (listeEtapes.Count > 0)
                 {
                     RouteStep init = PtToScreen((RouteStep)listeEtapes[0]);
-                    //                   DrawStep(e.Graphics, init);
+                    DrawStep(e.Graphics, init);
                     DrawIcon(e.Graphics, init);
                     RouteStep fin = null;
                     Pen p = new Pen(init.Color, init.LineWidth);
@@ -116,7 +102,7 @@ namespace Route
 
             }
     //        gr.DrawString(init.ToString(), new Font("Arial", 8), Brushes.Black, xx, yy);
-            gr.DrawImage(nico2, xx, yy);
+            gr.DrawImage(nico2, xx, yy, 20, 20);
         }
         private void DrawIcon(Graphics gr, RouteStep init, int width, int height)
         {
@@ -150,7 +136,7 @@ namespace Route
 
             }
             //     gr.DrawString(init.ToString(), new Font("Arial", 8), Brushes.Black, xx, yy);
-            gr.DrawImage(nico2, xx, yy);
+            gr.DrawImage(nico2, xx, yy, 20, 20);
         }
         private Image RotateImage(Image img, float rotationAngle)
         {
@@ -250,30 +236,30 @@ namespace Route
         #region Aspect
         private void LabelColor_Click(object sender, EventArgs e)
         {
-            if (curEt == null) return;
+            if (etapeCourante == null) return;
             ColorDialog colorDial = new ColorDialog();
-            colorDial.Color = curEt.Color;
+            colorDial.Color = etapeCourante.Color;
             if (colorDial.ShowDialog() == DialogResult.OK)
             {
-                curEt.Color = colorDial.Color;
-                labelColor.BackColor = curEt.Color;
+                etapeCourante.Color = colorDial.Color;
+                labelColor.BackColor = etapeCourante.Color;
                 Refresh();
             }
         }
         private void LabFont_Click(object sender, EventArgs e)
         {
-            if (curEt == null) return;
+            if (etapeCourante == null) return;
             FontDialog fontDial = new FontDialog();
-            fontDial.Font = curEt.Font;
-            fontDial.Color = curEt.FontColor;
+            fontDial.Font = etapeCourante.Font;
+            fontDial.Color = etapeCourante.FontColor;
             fontDial.ShowColor = true;
             if (fontDial.ShowDialog() == DialogResult.OK)
             {
-                curEt.Font = fontDial.Font;
-                curEt.FontColor = fontDial.Color;
-                curEt.FontBrush = new System.Drawing.SolidBrush(curEt.FontColor);
-                labFont.Font = curEt.Font;
-                labFont.ForeColor = curEt.FontColor;
+                etapeCourante.Font = fontDial.Font;
+                etapeCourante.FontColor = fontDial.Color;
+                etapeCourante.FontBrush = new System.Drawing.SolidBrush(etapeCourante.FontColor);
+                labFont.Font = etapeCourante.Font;
+                labFont.ForeColor = etapeCourante.FontColor;
                 Refresh();
             }
         }
@@ -315,8 +301,8 @@ namespace Route
             opfd.FilterIndex = 1;
             if (opfd.ShowDialog() == DialogResult.OK)
             {
-                ImPath = opfd.FileName;
-                curMap = Image.FromFile(ImPath);
+                cheminImage = opfd.FileName;
+                curMap = Image.FromFile(cheminImage);
                 hStretchFactor = (float)curMap.Width / (float)videoSize.Width;
                 vStretchFactor = (float)curMap.Height / (float)videoSize.Height;
       //          zoomFactor = 0.5F;
@@ -333,27 +319,33 @@ namespace Route
         }
         private void Record_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 InitialDirectory = @"D:\Documents",
                 FileName = "Film.avi",
                 Filter = "Fichier video (*.avi)|*.avi"
             };
-    //        if (mediaPlayer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            //if (mediaPlayer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            //{
+            //    mediaPlayer.Ctlcontrols.stop();
+            //}
+            if (mediaPlayer.playState == WMPLib.WMPPlayState.wmppsStopped)
             {
                 mediaPlayer.Visible = false;
                 mediaPlayer.Ctlcontrols.stop();
                 mediaPlayer.close();
+                mediaPlayer.Visible = false;
             }
-            splitContainer1.Panel2Collapsed = false;
-            curImage = Image.FromFile(ImPath);
-            curShow = (Image)curImage.Clone();
-            isRecording = true;
+            mediaPlayer.Visible = false;
+            splitContainerPrincipal.Panel2Collapsed = false;
+            imageCourante = Image.FromFile(cheminImage);
+            curShow = (Image)imageCourante.Clone();
             Refresh();
             int imageNumber = 1;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                currentFile = saveFileDialog1.FileName;
+                currentFile = saveFileDialog.FileName;
+                isRecording = true;
                 if (listeEtapes.Count > 1)
                 {
                     #region Calcul longueur totale du chemin
@@ -362,22 +354,22 @@ namespace Route
                     for (int i = 1; i < listeEtapes.Count; i++)
                     {
                         RouteStep end = PtToScreen(listeEtapes[i]);
-                        longTot = longTot + StepLength(init, end);
+                        longTot += StepLength(init, end);
                         init = end;
                     }
                     #endregion
                     uint framePerSecond = 25;
-                    string fichier = saveFileDialog1.FileName;
+                    string fichier = currentFile;
                     AviReaderWriter aviWriter = new AviReaderWriter();
                     try
                     {
                         aviWriter.Open(fichier, framePerSecond, videoSize.Width, videoSize.Height);
                         // image de base
-                        Bitmap bp = new Bitmap(curImage, videoSize.Width, videoSize.Height);
+                        Bitmap bp = new Bitmap(imageCourante, videoSize.Width, videoSize.Height);
                         bp.RotateFlip(RotateFlipType.Rotate180FlipX);
                         aviWriter.AddFrame(bp);
                         bp.Dispose();
-                        Graphics gr = Graphics.FromImage(curImage);
+                        Graphics gr = Graphics.FromImage(imageCourante);
                         init = PtToScreen(listeEtapes[0]);
                         Pen p = new Pen(init.Color, init.LineWidth);
                         for (int i = 1; i < listeEtapes.Count; i++)
@@ -388,7 +380,7 @@ namespace Route
                             float y = fin.Location.Y - init.Location.Y;
                             //long largeurEtape = (long)(x * x);
                             //long hauteurEtape = (long)(y * y);
-                            long longEtape = (long)Math.Sqrt((long)(x * x) + (long)(y * y)) * (long)vidLength / longTot;
+                            long longEtape = (long)Math.Sqrt((long)(x * x) + (long)(y * y)) * vidLength / longTot;
                             if (longEtape < 1)
                                 longEtape = 5;
                             int d = (int)longEtape; 
@@ -396,7 +388,7 @@ namespace Route
                             for (int j = 1; j <= d; j++)
                             {
                                 #region One step
-                                gr = Graphics.FromImage(curImage);
+                                gr = Graphics.FromImage(imageCourante);
                                 long step = (long)x * j / d;
                                 long hstep = (long)(step * slope);
                                 if (init.Text != "")
@@ -404,7 +396,7 @@ namespace Route
                                 RouteStep place = PtToScreen(new RouteStep(new Point((int)(init.Location.X + step), (int)(init.Location.Y + hstep))));
                                 gr.DrawLine(p, place.Location.X, place.Location.Y, place.Location.X + 2, place.Location.Y + 2);
                                 curShow.Dispose();
-                                curShow = (Image)curImage.Clone();
+                                curShow = (Image)imageCourante.Clone();
                                 curIcone = (Image)curShow.Clone();
                                 gr = Graphics.FromImage(curIcone);
                                 DrawIcon(gr, place, 20, 20);
@@ -414,7 +406,6 @@ namespace Route
                                     nombreImages.Text += "s";
                                 AddImageToFilm(aviWriter, curShow);
                                 AddImageToFilm(aviWriter, curIcone);
-                                //curIcone.Dispose();
                                 Refresh();
                                 #endregion
                             }
@@ -426,10 +417,9 @@ namespace Route
                         if (init.Text != "")
                             gr.DrawString(init.Text, init.Font, Brushes.White, new Point(init.Location.X + 2, init.Location.Y));
                         curShow.Dispose();
-                        curShow = (Image)curImage.Clone();
+                        curShow = (Image)imageCourante.Clone();
                         gr = Graphics.FromImage(curShow);
                         DrawIcon(gr, init);
-
                         for (int uu = 0; uu < 10; uu++)
                         {
                             AddImageToFilm(aviWriter, curIcone);
@@ -454,12 +444,22 @@ namespace Route
             bp.RotateFlip(RotateFlipType.Rotate180FlipX);
             aviWriter.AddFrame(bp);
             bp.Dispose();
+            dessin = im;
+        }
+        Image dessin;
+        private void DrawRecord_Paint(object sender, PaintEventArgs e)
+        {
+            Size DrawSize = new Size((int)(videoSize.Width * zoomFactor), (int)(videoSize.Height * zoomFactor));
+            if (isRecording)/*&(dessin!=null)*/
+            {
+                e.Graphics.DrawImage(dessin, 0, 0, DrawSize.Width, DrawSize.Height);
+            }
         }
         void m_Click(object sender, EventArgs e)
         {
-            if (curEt != null)
+            if (etapeCourante != null)
             {
-                listeEtapes.Remove(curEt);
+                listeEtapes.Remove(etapeCourante);
                 Refresh();
             }
         }
@@ -467,9 +467,9 @@ namespace Route
         private void DrawPanel_MouseMove(object sender, MouseEventArgs e)
         {
             Point pt = ScreenToPoint(e.Location);
-            if ((curEt != null) && moving)
+            if ((etapeCourante != null) && moving)
             {
-                curEt.Move(pt);
+                etapeCourante.Move(pt);
                 Refresh();
             }
         }
@@ -485,12 +485,12 @@ namespace Route
         private void DrawPanel_MouseDown(object sender, MouseEventArgs e)
         {
             moving = false;
-            curEt = FindStep(e);
+            etapeCourante = FindStep(e);
             Point pt = ScreenToPoint(e.Location);
             //     pt = e.Location;
             if (e.Button == MouseButtons.Left)
             {
-                if (curEt == null)
+                if (etapeCourante == null)
                 {
                     moving = false;
                     //ShowControls(false);
@@ -505,11 +505,11 @@ namespace Route
                 {
                     moving = true;
                     //ShowControls(true);
-                    labelColor.BackColor = curEt.Color;
-                    Etiq.Text = curEt.Text;
-                    lineWidth.Value = curEt.LineWidth;
-                    labFont.Font = curEt.Font;
-                    labFont.ForeColor = curEt.FontColor;
+                    labelColor.BackColor = etapeCourante.Color;
+                    Etiq.Text = etapeCourante.Text;
+                    lineWidth.Value = etapeCourante.LineWidth;
+                    labFont.Font = etapeCourante.Font;
+                    labFont.ForeColor = etapeCourante.FontColor;
                 }
             }
             else
@@ -576,18 +576,18 @@ namespace Route
         }
         private void Etiq_TextChanged(object sender, EventArgs e)
         {
-            if (curEt != null)
+            if (etapeCourante != null)
             {
-                curEt.Text = Etiq.Text;
+                etapeCourante.Text = Etiq.Text;
                 Refresh();
             }
         }
         private void lineWidth_ValueChanged(object sender, EventArgs e)
         {
             currentWidth = (int)lineWidth.Value;
-            if (curEt != null)
+            if (etapeCourante != null)
             {
-                curEt.LineWidth = (int)lineWidth.Value;
+                etapeCourante.LineWidth = (int)lineWidth.Value;
                 Refresh();
             }
 
@@ -601,6 +601,11 @@ namespace Route
             mediaPlayer.URL = currentFile;
             mediaPlayer.Ctlcontrols.play();
             Refresh();
+        }
+
+        private void mediaPlayer_Resize(object sender, EventArgs e)
+        {
+            mediaPlayer.Dock = DockStyle.Fill;
         }
     }
     class DoubleBufferPanel : Panel

@@ -31,7 +31,7 @@
             this.endPicker = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.beginPicker = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.selectDate = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.keywordList = new System.Windows.Forms.ComboBox();
@@ -86,15 +86,15 @@
             this.beginPicker.TabIndex = 65;
             this.beginPicker.ValueChanged += new System.EventHandler(this.beginPicker_ValueChanged);
             // 
-            // button1
+            // selectDate
             // 
-            this.button1.Location = new System.Drawing.Point(58, 87);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 63;
-            this.button1.Text = "Select";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.selectDate.Location = new System.Drawing.Point(58, 87);
+            this.selectDate.Name = "selectDate";
+            this.selectDate.Size = new System.Drawing.Size(75, 23);
+            this.selectDate.TabIndex = 63;
+            this.selectDate.Text = "Select";
+            this.selectDate.UseVisualStyleBackColor = true;
+            this.selectDate.Click += new System.EventHandler(this.selectDate_Click);
             // 
             // tabPage3
             // 
@@ -102,7 +102,7 @@
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.beginPicker);
             this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.selectDate);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -330,7 +330,7 @@
         private System.Windows.Forms.DateTimePicker endPicker;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker beginPicker;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button selectDate;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox keywordList;

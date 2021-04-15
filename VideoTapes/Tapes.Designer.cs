@@ -30,137 +30,131 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tapes));
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerPrincipal = new System.Windows.Forms.SplitContainer();
+            this.splitContainerVideos = new System.Windows.Forms.SplitContainer();
             this.videos = new System.Windows.Forms.ListBox();
-            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerDétailsVidéo = new System.Windows.Forms.SplitContainer();
             this.bdFrames = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelFrame = new System.Windows.Forms.Label();
             this.bdDuration = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelDurée = new System.Windows.Forms.Label();
             this.MetaJour = new System.Windows.Forms.Button();
             this.bdNumberOfScenes = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelScénes = new System.Windows.Forms.Label();
             this.bdNumberOfShots = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelShots = new System.Windows.Forms.Label();
             this.bdTitreBande = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelTitre = new System.Windows.Forms.Label();
             this.bdTitreFichier = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labelFichier = new System.Windows.Forms.Label();
+            this.labelComment = new System.Windows.Forms.Label();
             this.bdPeriode = new System.Windows.Forms.TextBox();
             this.bdComment = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.labelPériode = new System.Windows.Forms.Label();
+            this.tabControlInfo = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.sceneIndexControl = new VideoTapes.SceneIndexControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataSelector = new VideoTapes.DataSelector();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerTimeLine = new System.Windows.Forms.SplitContainer();
+            this.splitContainerScenes = new System.Windows.Forms.SplitContainer();
             this.displayScenesPanel = new VideoTapes.DisplayScenesPanel();
             this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.splitContainer8 = new System.Windows.Forms.SplitContainer();
             this.timeLine = new VideoTapes.TimeLine();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerToolStrip = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.nouveauToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ouvrirToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.enregistrerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.global = new System.Windows.Forms.ToolStripLabel();
             this.local = new System.Windows.Forms.ToolStripLabel();
-            this.imprimerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            this.splitContainerMenu = new System.Windows.Forms.SplitContainer();
+            this.sceneNumber = new System.Windows.Forms.ToolStripTextBox();
+            this.nouveauToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ouvrirToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.enregistrerToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.imprimerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.couperToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copierToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.collerToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.détails = new System.Windows.Forms.ToolStripButton();
             this.ZoomOut = new System.Windows.Forms.ToolStripButton();
             this.ZoomIn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.drawRoute = new System.Windows.Forms.ToolStripButton();
             this.fullscreen = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer9 = new System.Windows.Forms.SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
-            this.splitContainer6.Panel1.SuspendLayout();
-            this.splitContainer6.Panel2.SuspendLayout();
-            this.splitContainer6.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.searchScene = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPrincipal)).BeginInit();
+            this.splitContainerPrincipal.Panel1.SuspendLayout();
+            this.splitContainerPrincipal.Panel2.SuspendLayout();
+            this.splitContainerPrincipal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerVideos)).BeginInit();
+            this.splitContainerVideos.Panel1.SuspendLayout();
+            this.splitContainerVideos.Panel2.SuspendLayout();
+            this.splitContainerVideos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDétailsVidéo)).BeginInit();
+            this.splitContainerDétailsVidéo.Panel1.SuspendLayout();
+            this.splitContainerDétailsVidéo.Panel2.SuspendLayout();
+            this.splitContainerDétailsVidéo.SuspendLayout();
+            this.tabControlInfo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
-            this.splitContainer5.Panel1.SuspendLayout();
-            this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
-            this.splitContainer7.Panel1.SuspendLayout();
-            this.splitContainer7.Panel2.SuspendLayout();
-            this.splitContainer7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTimeLine)).BeginInit();
+            this.splitContainerTimeLine.Panel1.SuspendLayout();
+            this.splitContainerTimeLine.Panel2.SuspendLayout();
+            this.splitContainerTimeLine.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerScenes)).BeginInit();
+            this.splitContainerScenes.Panel1.SuspendLayout();
+            this.splitContainerScenes.Panel2.SuspendLayout();
+            this.splitContainerScenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).BeginInit();
-            this.splitContainer8.Panel2.SuspendLayout();
-            this.splitContainer8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerToolStrip)).BeginInit();
+            this.splitContainerToolStrip.Panel1.SuspendLayout();
+            this.splitContainerToolStrip.Panel2.SuspendLayout();
+            this.splitContainerToolStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).BeginInit();
-            this.splitContainer9.Panel1.SuspendLayout();
-            this.splitContainer9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMenu)).BeginInit();
+            this.splitContainerMenu.Panel1.SuspendLayout();
+            this.splitContainerMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // splitContainerPrincipal
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainerPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPrincipal.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerPrincipal.IsSplitterFixed = true;
+            this.splitContainerPrincipal.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerPrincipal.Name = "splitContainerPrincipal";
             // 
-            // splitContainer1.Panel1
+            // splitContainerPrincipal.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.splitContainerPrincipal.Panel1.Controls.Add(this.splitContainerVideos);
             // 
-            // splitContainer1.Panel2
+            // splitContainerPrincipal.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer1.Size = new System.Drawing.Size(1279, 826);
-            this.splitContainer1.SplitterDistance = 266;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainerPrincipal.Panel2.Controls.Add(this.splitContainerTimeLine);
+            this.splitContainerPrincipal.Size = new System.Drawing.Size(1279, 826);
+            this.splitContainerPrincipal.SplitterDistance = 266;
+            this.splitContainerPrincipal.TabIndex = 0;
             // 
-            // splitContainer2
+            // splitContainerVideos
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerVideos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerVideos.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerVideos.Name = "splitContainerVideos";
+            this.splitContainerVideos.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer2.Panel1
+            // splitContainerVideos.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.videos);
+            this.splitContainerVideos.Panel1.Controls.Add(this.videos);
             // 
-            // splitContainer2.Panel2
+            // splitContainerVideos.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer6);
-            this.splitContainer2.Size = new System.Drawing.Size(266, 826);
-            this.splitContainer2.SplitterDistance = 295;
-            this.splitContainer2.TabIndex = 0;
+            this.splitContainerVideos.Panel2.Controls.Add(this.splitContainerDétailsVidéo);
+            this.splitContainerVideos.Size = new System.Drawing.Size(266, 826);
+            this.splitContainerVideos.SplitterDistance = 237;
+            this.splitContainerVideos.TabIndex = 0;
             // 
             // videos
             // 
@@ -168,46 +162,46 @@
             this.videos.FormattingEnabled = true;
             this.videos.Location = new System.Drawing.Point(0, 0);
             this.videos.Name = "videos";
-            this.videos.Size = new System.Drawing.Size(266, 295);
+            this.videos.Size = new System.Drawing.Size(266, 237);
             this.videos.TabIndex = 0;
             this.videos.SelectedIndexChanged += new System.EventHandler(this.Videos_SelectedIndexChanged);
             this.videos.DataSourceChanged += new System.EventHandler(this.Videos_DataSourceChanged);
             // 
-            // splitContainer6
+            // splitContainerDétailsVidéo
             // 
-            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer6.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer6.IsSplitterFixed = true;
-            this.splitContainer6.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer6.Name = "splitContainer6";
-            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerDétailsVidéo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerDétailsVidéo.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerDétailsVidéo.IsSplitterFixed = true;
+            this.splitContainerDétailsVidéo.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerDétailsVidéo.Name = "splitContainerDétailsVidéo";
+            this.splitContainerDétailsVidéo.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer6.Panel1
+            // splitContainerDétailsVidéo.Panel1
             // 
-            this.splitContainer6.Panel1.Controls.Add(this.bdFrames);
-            this.splitContainer6.Panel1.Controls.Add(this.label3);
-            this.splitContainer6.Panel1.Controls.Add(this.bdDuration);
-            this.splitContainer6.Panel1.Controls.Add(this.label4);
-            this.splitContainer6.Panel1.Controls.Add(this.MetaJour);
-            this.splitContainer6.Panel1.Controls.Add(this.bdNumberOfScenes);
-            this.splitContainer6.Panel1.Controls.Add(this.label2);
-            this.splitContainer6.Panel1.Controls.Add(this.bdNumberOfShots);
-            this.splitContainer6.Panel1.Controls.Add(this.label1);
-            this.splitContainer6.Panel1.Controls.Add(this.bdTitreBande);
-            this.splitContainer6.Panel1.Controls.Add(this.label6);
-            this.splitContainer6.Panel1.Controls.Add(this.bdTitreFichier);
-            this.splitContainer6.Panel1.Controls.Add(this.label7);
-            this.splitContainer6.Panel1.Controls.Add(this.label8);
-            this.splitContainer6.Panel1.Controls.Add(this.bdPeriode);
-            this.splitContainer6.Panel1.Controls.Add(this.bdComment);
-            this.splitContainer6.Panel1.Controls.Add(this.label9);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdFrames);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelFrame);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdDuration);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelDurée);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.MetaJour);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdNumberOfScenes);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelScénes);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdNumberOfShots);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelShots);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdTitreBande);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelTitre);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdTitreFichier);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelFichier);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelComment);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdPeriode);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.bdComment);
+            this.splitContainerDétailsVidéo.Panel1.Controls.Add(this.labelPériode);
             // 
-            // splitContainer6.Panel2
+            // splitContainerDétailsVidéo.Panel2
             // 
-            this.splitContainer6.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer6.Size = new System.Drawing.Size(266, 527);
-            this.splitContainer6.SplitterDistance = 205;
-            this.splitContainer6.TabIndex = 0;
+            this.splitContainerDétailsVidéo.Panel2.Controls.Add(this.tabControlInfo);
+            this.splitContainerDétailsVidéo.Size = new System.Drawing.Size(266, 585);
+            this.splitContainerDétailsVidéo.SplitterDistance = 205;
+            this.splitContainerDétailsVidéo.TabIndex = 0;
             // 
             // bdFrames
             // 
@@ -217,14 +211,14 @@
             this.bdFrames.Size = new System.Drawing.Size(74, 20);
             this.bdFrames.TabIndex = 90;
             // 
-            // label3
+            // labelFrame
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(134, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 91;
-            this.label3.Text = "Frames";
+            this.labelFrame.AutoSize = true;
+            this.labelFrame.Location = new System.Drawing.Point(134, 133);
+            this.labelFrame.Name = "labelFrame";
+            this.labelFrame.Size = new System.Drawing.Size(41, 13);
+            this.labelFrame.TabIndex = 91;
+            this.labelFrame.Text = "Frames";
             // 
             // bdDuration
             // 
@@ -234,14 +228,14 @@
             this.bdDuration.Size = new System.Drawing.Size(71, 20);
             this.bdDuration.TabIndex = 88;
             // 
-            // label4
+            // labelDurée
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 133);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
-            this.label4.TabIndex = 89;
-            this.label4.Text = "Durée";
+            this.labelDurée.AutoSize = true;
+            this.labelDurée.Location = new System.Drawing.Point(7, 133);
+            this.labelDurée.Name = "labelDurée";
+            this.labelDurée.Size = new System.Drawing.Size(36, 13);
+            this.labelDurée.TabIndex = 89;
+            this.labelDurée.Text = "Durée";
             // 
             // MetaJour
             // 
@@ -261,14 +255,14 @@
             this.bdNumberOfScenes.Size = new System.Drawing.Size(67, 20);
             this.bdNumberOfScenes.TabIndex = 85;
             // 
-            // label2
+            // labelScénes
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 156);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 86;
-            this.label2.Text = "Scènes";
+            this.labelScénes.AutoSize = true;
+            this.labelScénes.Location = new System.Drawing.Point(135, 156);
+            this.labelScénes.Name = "labelScénes";
+            this.labelScénes.Size = new System.Drawing.Size(43, 13);
+            this.labelScénes.TabIndex = 86;
+            this.labelScénes.Text = "Scènes";
             // 
             // bdNumberOfShots
             // 
@@ -278,14 +272,14 @@
             this.bdNumberOfShots.Size = new System.Drawing.Size(71, 20);
             this.bdNumberOfShots.TabIndex = 83;
             // 
-            // label1
+            // labelShots
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 156);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 84;
-            this.label1.Text = "Shots";
+            this.labelShots.AutoSize = true;
+            this.labelShots.Location = new System.Drawing.Point(8, 156);
+            this.labelShots.Name = "labelShots";
+            this.labelShots.Size = new System.Drawing.Size(34, 13);
+            this.labelShots.TabIndex = 84;
+            this.labelShots.Text = "Shots";
             // 
             // bdTitreBande
             // 
@@ -294,14 +288,14 @@
             this.bdTitreBande.Size = new System.Drawing.Size(199, 20);
             this.bdTitreBande.TabIndex = 75;
             // 
-            // label6
+            // labelTitre
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 7);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 13);
-            this.label6.TabIndex = 76;
-            this.label6.Text = "Titre";
+            this.labelTitre.AutoSize = true;
+            this.labelTitre.Location = new System.Drawing.Point(7, 7);
+            this.labelTitre.Name = "labelTitre";
+            this.labelTitre.Size = new System.Drawing.Size(28, 13);
+            this.labelTitre.TabIndex = 76;
+            this.labelTitre.Text = "Titre";
             // 
             // bdTitreFichier
             // 
@@ -311,23 +305,23 @@
             this.bdTitreFichier.Size = new System.Drawing.Size(199, 20);
             this.bdTitreFichier.TabIndex = 77;
             // 
-            // label7
+            // labelFichier
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 31);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 13);
-            this.label7.TabIndex = 78;
-            this.label7.Text = "Fichier";
+            this.labelFichier.AutoSize = true;
+            this.labelFichier.Location = new System.Drawing.Point(7, 31);
+            this.labelFichier.Name = "labelFichier";
+            this.labelFichier.Size = new System.Drawing.Size(38, 13);
+            this.labelFichier.TabIndex = 78;
+            this.labelFichier.Text = "Fichier";
             // 
-            // label8
+            // labelComment
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 79);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 13);
-            this.label8.TabIndex = 82;
-            this.label8.Text = "Comment";
+            this.labelComment.AutoSize = true;
+            this.labelComment.Location = new System.Drawing.Point(7, 79);
+            this.labelComment.Name = "labelComment";
+            this.labelComment.Size = new System.Drawing.Size(51, 13);
+            this.labelComment.TabIndex = 82;
+            this.labelComment.Text = "Comment";
             // 
             // bdPeriode
             // 
@@ -345,25 +339,25 @@
             this.bdComment.Size = new System.Drawing.Size(199, 51);
             this.bdComment.TabIndex = 81;
             // 
-            // label9
+            // labelPériode
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 55);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 13);
-            this.label9.TabIndex = 80;
-            this.label9.Text = "Période";
+            this.labelPériode.AutoSize = true;
+            this.labelPériode.Location = new System.Drawing.Point(7, 55);
+            this.labelPériode.Name = "labelPériode";
+            this.labelPériode.Size = new System.Drawing.Size(43, 13);
+            this.labelPériode.TabIndex = 80;
+            this.labelPériode.Text = "Période";
             // 
-            // tabControl1
+            // tabControlInfo
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(266, 318);
-            this.tabControl1.TabIndex = 1;
+            this.tabControlInfo.Controls.Add(this.tabPage1);
+            this.tabControlInfo.Controls.Add(this.tabPage2);
+            this.tabControlInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlInfo.Location = new System.Drawing.Point(0, 0);
+            this.tabControlInfo.Name = "tabControlInfo";
+            this.tabControlInfo.SelectedIndex = 0;
+            this.tabControlInfo.Size = new System.Drawing.Size(266, 376);
+            this.tabControlInfo.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -371,7 +365,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(258, 292);
+            this.tabPage1.Size = new System.Drawing.Size(258, 350);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Informations";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -381,7 +375,7 @@
             this.sceneIndexControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sceneIndexControl.Location = new System.Drawing.Point(3, 3);
             this.sceneIndexControl.Name = "sceneIndexControl";
-            this.sceneIndexControl.Size = new System.Drawing.Size(252, 286);
+            this.sceneIndexControl.Size = new System.Drawing.Size(252, 344);
             this.sceneIndexControl.TabIndex = 0;
             this.sceneIndexControl.SceneInfoChanged += new VideoTapes.SceneInfoChangedHandler(this.SceneIndexControl_SceneInfoChanged);
             // 
@@ -391,7 +385,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(258, 292);
+            this.tabPage2.Size = new System.Drawing.Size(258, 350);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Recherche";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -401,72 +395,56 @@
             this.dataSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSelector.Location = new System.Drawing.Point(3, 3);
             this.dataSelector.Name = "dataSelector";
-            this.dataSelector.Size = new System.Drawing.Size(252, 286);
+            this.dataSelector.Size = new System.Drawing.Size(252, 344);
             this.dataSelector.TabIndex = 0;
-            this.dataSelector.LieuxSelected += new VideoTapes.LieuxSelectedHandler(this.DataSelector1_LieuxSelected);
-            this.dataSelector.PersonneSelected += new VideoTapes.PersonneSelectedHandler(this.DataSelector1_PersonneSelected);
-            this.dataSelector.DateSelected += new VideoTapes.DateSelectedHandler(this.DataSelector1_DateSelected);
-            this.dataSelector.KeywordsSelected += new VideoTapes.KeywordsSelectedHandler(this.DataSelector1_KeywordsSelected);
+            this.dataSelector.LieuxSelected += new VideoTapes.LieuxSelectedHandler(this.DataSelector_LieuxSelected);
+            this.dataSelector.PersonneSelected += new VideoTapes.PersonneSelectedHandler(this.DataSelector_PersonneSelected);
+            this.dataSelector.DateSelected += new VideoTapes.DateSelectedHandler(this.DataSelector_DateSelected);
+            this.dataSelector.KeywordsSelected += new VideoTapes.KeywordsSelectedHandler(this.DataSelector_KeywordsSelected);
             // 
-            // splitContainer4
+            // splitContainerTimeLine
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerTimeLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerTimeLine.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerTimeLine.Name = "splitContainerTimeLine";
+            this.splitContainerTimeLine.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer4.Panel1
+            // splitContainerTimeLine.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.splitContainer5);
+            this.splitContainerTimeLine.Panel1.Controls.Add(this.splitContainerScenes);
             // 
-            // splitContainer4.Panel2
+            // splitContainerTimeLine.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.splitContainer8);
-            this.splitContainer4.Size = new System.Drawing.Size(1009, 826);
-            this.splitContainer4.SplitterDistance = 588;
-            this.splitContainer4.TabIndex = 1;
+            this.splitContainerTimeLine.Panel2.Controls.Add(this.timeLine);
+            this.splitContainerTimeLine.Size = new System.Drawing.Size(1009, 826);
+            this.splitContainerTimeLine.SplitterDistance = 589;
+            this.splitContainerTimeLine.TabIndex = 1;
             // 
-            // splitContainer5
+            // splitContainerScenes
             // 
-            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer5.Name = "splitContainer5";
-            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerScenes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerScenes.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerScenes.Name = "splitContainerScenes";
             // 
-            // splitContainer5.Panel1
+            // splitContainerScenes.Panel1
             // 
-            this.splitContainer5.Panel1.Controls.Add(this.splitContainer7);
-            this.splitContainer5.Panel2Collapsed = true;
-            this.splitContainer5.Size = new System.Drawing.Size(1009, 588);
-            this.splitContainer5.SplitterDistance = 220;
-            this.splitContainer5.TabIndex = 0;
+            this.splitContainerScenes.Panel1.Controls.Add(this.displayScenesPanel);
             // 
-            // splitContainer7
+            // splitContainerScenes.Panel2
             // 
-            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer7.Name = "splitContainer7";
-            // 
-            // splitContainer7.Panel1
-            // 
-            this.splitContainer7.Panel1.Controls.Add(this.displayScenesPanel);
-            // 
-            // splitContainer7.Panel2
-            // 
-            this.splitContainer7.Panel2.Controls.Add(this.axWindowsMediaPlayer);
-            this.splitContainer7.Size = new System.Drawing.Size(1009, 588);
-            this.splitContainer7.SplitterDistance = 426;
-            this.splitContainer7.TabIndex = 0;
+            this.splitContainerScenes.Panel2.Controls.Add(this.axWindowsMediaPlayer);
+            this.splitContainerScenes.Size = new System.Drawing.Size(1009, 589);
+            this.splitContainerScenes.SplitterDistance = 426;
+            this.splitContainerScenes.TabIndex = 0;
             // 
             // displayScenesPanel
             // 
-            this.displayScenesPanel.Détails = false;
             this.displayScenesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.displayScenesPanel.Facteur = 3;
             this.displayScenesPanel.ImageZoomFactor = 1D;
             this.displayScenesPanel.Location = new System.Drawing.Point(0, 0);
             this.displayScenesPanel.Name = "displayScenesPanel";
-            this.displayScenesPanel.Size = new System.Drawing.Size(426, 588);
+            this.displayScenesPanel.Size = new System.Drawing.Size(426, 589);
             this.displayScenesPanel.TabIndex = 1;
             this.displayScenesPanel.SceneSelected += new VideoTapes.SceneSelectedHandler(this.DisplayScenesPanel_SceneSelected);
             this.displayScenesPanel.MultiSceneSelected += new VideoTapes.MultiSceneSelectedHandler(this.DisplayScenesPanel_MultiSceneSelected);
@@ -479,25 +457,10 @@
             this.axWindowsMediaPlayer.Location = new System.Drawing.Point(0, 0);
             this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
             this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(579, 588);
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(579, 589);
             this.axWindowsMediaPlayer.TabIndex = 1;
+            this.axWindowsMediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.AxWindowsMediaPlayer_PlayStateChange);
             this.axWindowsMediaPlayer.CurrentItemChange += new AxWMPLib._WMPOCXEvents_CurrentItemChangeEventHandler(this.AxWindowsMediaPlayer_CurrentItemChange);
-            this.axWindowsMediaPlayer.PlayStateChange += AxWindowsMediaPlayer_PlayStateChange;
-            // 
-            // splitContainer8
-            // 
-            this.splitContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer8.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer8.Name = "splitContainer8";
-            this.splitContainer8.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.splitContainer8.Panel1Collapsed = true;
-            // 
-            // splitContainer8.Panel2
-            // 
-            this.splitContainer8.Panel2.Controls.Add(this.timeLine);
-            this.splitContainer8.Size = new System.Drawing.Size(1009, 234);
-            this.splitContainer8.SplitterDistance = 109;
-            this.splitContainer8.TabIndex = 1;
             // 
             // timeLine
             // 
@@ -506,31 +469,31 @@
             this.timeLine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.timeLine.Location = new System.Drawing.Point(0, 0);
             this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(1009, 234);
+            this.timeLine.Size = new System.Drawing.Size(1009, 233);
             this.timeLine.TabIndex = 0;
             this.timeLine.ShotSelected += new VideoTapes.ShotSelectedHandler(this.TimeLine_ShotSelected);
-            this.timeLine.Pause += new VideoTapes.PlayerHandler(this.timeLine_Pause);
-            this.timeLine.Stop += new VideoTapes.PlayerHandler(this.timeLine_Stop);
+            this.timeLine.Pause += new VideoTapes.PlayerHandler(this.TimeLine_Pause);
+            this.timeLine.Stop += new VideoTapes.PlayerHandler(this.TimeLine_Stop);
             // 
-            // splitContainer3
+            // splitContainerToolStrip
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerToolStrip.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerToolStrip.IsSplitterFixed = true;
+            this.splitContainerToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerToolStrip.Name = "splitContainerToolStrip";
+            this.splitContainerToolStrip.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer3.Panel1
+            // splitContainerToolStrip.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.toolStrip1);
+            this.splitContainerToolStrip.Panel1.Controls.Add(this.toolStrip1);
             // 
-            // splitContainer3.Panel2
+            // splitContainerToolStrip.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer3.Size = new System.Drawing.Size(1279, 855);
-            this.splitContainer3.SplitterDistance = 25;
-            this.splitContainer3.TabIndex = 1;
+            this.splitContainerToolStrip.Panel2.Controls.Add(this.splitContainerPrincipal);
+            this.splitContainerToolStrip.Size = new System.Drawing.Size(1279, 855);
+            this.splitContainerToolStrip.SplitterDistance = 25;
+            this.splitContainerToolStrip.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -553,12 +516,69 @@
             this.ZoomIn,
             this.toolStripLabel,
             this.drawRoute,
-            this.fullscreen});
+            this.fullscreen,
+            this.sceneNumber,
+            this.searchScene});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1279, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(97, 22);
+            this.toolStripLabel1.Text = "Longueur totale :";
+            // 
+            // global
+            // 
+            this.global.Name = "global";
+            this.global.Size = new System.Drawing.Size(19, 22);
+            this.global.Text = "    ";
+            // 
+            // local
+            // 
+            this.local.Name = "local";
+            this.local.Size = new System.Drawing.Size(16, 22);
+            this.local.Text = "   ";
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel
+            // 
+            this.toolStripLabel.Name = "toolStripLabel";
+            this.toolStripLabel.Size = new System.Drawing.Size(22, 22);
+            this.toolStripLabel.Text = "     ";
+            // 
+            // splitContainerMenu
+            // 
+            this.splitContainerMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMenu.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMenu.Name = "splitContainerMenu";
+            this.splitContainerMenu.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerMenu.Panel1
+            // 
+            this.splitContainerMenu.Panel1.Controls.Add(this.splitContainerToolStrip);
+            this.splitContainerMenu.Panel2Collapsed = true;
+            this.splitContainerMenu.Size = new System.Drawing.Size(1279, 855);
+            this.splitContainerMenu.SplitterDistance = 583;
+            this.splitContainerMenu.TabIndex = 3;
+            // 
+            // sceneNumber
+            // 
+            this.sceneNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.sceneNumber.Name = "sceneNumber";
+            this.sceneNumber.Size = new System.Drawing.Size(100, 25);
             // 
             // nouveauToolStripButton
             // 
@@ -590,24 +610,6 @@
             this.enregistrerToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.enregistrerToolStripButton.Text = "&Enregistrer";
             // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(97, 22);
-            this.toolStripLabel1.Text = "Longueur totale :";
-            // 
-            // global
-            // 
-            this.global.Name = "global";
-            this.global.Size = new System.Drawing.Size(19, 22);
-            this.global.Text = "    ";
-            // 
-            // local
-            // 
-            this.local.Name = "local";
-            this.local.Size = new System.Drawing.Size(16, 22);
-            this.local.Text = "   ";
-            // 
             // imprimerToolStripButton
             // 
             this.imprimerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -616,12 +618,6 @@
             this.imprimerToolStripButton.Name = "imprimerToolStripButton";
             this.imprimerToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.imprimerToolStripButton.Text = "&Imprimer";
-            this.imprimerToolStripButton.Click += new System.EventHandler(this.imprimerToolStripButton_Click);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
             // couperToolStripButton
             // 
@@ -650,11 +646,6 @@
             this.collerToolStripButton.Name = "collerToolStripButton";
             this.collerToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.collerToolStripButton.Text = "Co&ller";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // ToolStripButton
             // 
@@ -701,12 +692,6 @@
             this.ZoomIn.ToolTipText = "Zoom In";
             this.ZoomIn.Click += new System.EventHandler(this.ZoomIn_Click);
             // 
-            // toolStripLabel
-            // 
-            this.toolStripLabel.Name = "toolStripLabel";
-            this.toolStripLabel.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel.Text = "     ";
-            // 
             // drawRoute
             // 
             this.drawRoute.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -729,83 +714,72 @@
             this.fullscreen.Text = "Plein Ecran";
             this.fullscreen.CheckedChanged += new System.EventHandler(this.Fullscreen_CheckedChanged);
             // 
-            // splitContainer9
+            // searchScene
             // 
-            this.splitContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer9.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer9.Name = "splitContainer9";
-            this.splitContainer9.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer9.Panel1
-            // 
-            this.splitContainer9.Panel1.Controls.Add(this.splitContainer3);
-            this.splitContainer9.Panel2Collapsed = true;
-            this.splitContainer9.Size = new System.Drawing.Size(1279, 855);
-            this.splitContainer9.SplitterDistance = 583;
-            this.splitContainer9.TabIndex = 3;
+            this.searchScene.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchScene.Image = global::VideoTapes.Properties.Resources.SearchFolderHS;
+            this.searchScene.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchScene.Name = "searchScene";
+            this.searchScene.Size = new System.Drawing.Size(23, 22);
+            this.searchScene.Text = "toolStripButton1";
+            this.searchScene.Click += new System.EventHandler(this.searchScene_Click);
             // 
             // Tapes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1279, 855);
-            this.Controls.Add(this.splitContainer9);
+            this.Controls.Add(this.splitContainerMenu);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Tapes";
             this.Text = "Tapes";
             this.Load += new System.EventHandler(this.Tapes_Load);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.splitContainer6.Panel1.ResumeLayout(false);
-            this.splitContainer6.Panel1.PerformLayout();
-            this.splitContainer6.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
-            this.splitContainer6.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.splitContainerPrincipal.Panel1.ResumeLayout(false);
+            this.splitContainerPrincipal.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPrincipal)).EndInit();
+            this.splitContainerPrincipal.ResumeLayout(false);
+            this.splitContainerVideos.Panel1.ResumeLayout(false);
+            this.splitContainerVideos.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerVideos)).EndInit();
+            this.splitContainerVideos.ResumeLayout(false);
+            this.splitContainerDétailsVidéo.Panel1.ResumeLayout(false);
+            this.splitContainerDétailsVidéo.Panel1.PerformLayout();
+            this.splitContainerDétailsVidéo.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDétailsVidéo)).EndInit();
+            this.splitContainerDétailsVidéo.ResumeLayout(false);
+            this.tabControlInfo.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
-            this.splitContainer5.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
-            this.splitContainer5.ResumeLayout(false);
-            this.splitContainer7.Panel1.ResumeLayout(false);
-            this.splitContainer7.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
-            this.splitContainer7.ResumeLayout(false);
+            this.splitContainerTimeLine.Panel1.ResumeLayout(false);
+            this.splitContainerTimeLine.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTimeLine)).EndInit();
+            this.splitContainerTimeLine.ResumeLayout(false);
+            this.splitContainerScenes.Panel1.ResumeLayout(false);
+            this.splitContainerScenes.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerScenes)).EndInit();
+            this.splitContainerScenes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).EndInit();
-            this.splitContainer8.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).EndInit();
-            this.splitContainer8.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            this.splitContainerToolStrip.Panel1.ResumeLayout(false);
+            this.splitContainerToolStrip.Panel1.PerformLayout();
+            this.splitContainerToolStrip.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerToolStrip)).EndInit();
+            this.splitContainerToolStrip.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.splitContainer9.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).EndInit();
-            this.splitContainer9.ResumeLayout(false);
+            this.splitContainerMenu.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMenu)).EndInit();
+            this.splitContainerMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerPrincipal;
         private System.Windows.Forms.ListBox videos;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer splitContainerVideos;
+        private System.Windows.Forms.SplitContainer splitContainerToolStrip;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton nouveauToolStripButton;
         private System.Windows.Forms.ToolStripButton ouvrirToolStripButton;
@@ -820,43 +794,43 @@
         private System.Windows.Forms.ToolStripLabel local;
         private System.Windows.Forms.ToolStripLabel global;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.SplitContainer splitContainerTimeLine;
+        private System.Windows.Forms.SplitContainer splitContainerDétailsVidéo;
         private System.Windows.Forms.TextBox bdFrames;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelFrame;
         private System.Windows.Forms.TextBox bdDuration;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelDurée;
         private System.Windows.Forms.Button MetaJour;
         private System.Windows.Forms.TextBox bdNumberOfScenes;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelScénes;
         private System.Windows.Forms.TextBox bdNumberOfShots;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelShots;
         private System.Windows.Forms.TextBox bdTitreBande;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelTitre;
         private System.Windows.Forms.TextBox bdTitreFichier;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelFichier;
+        private System.Windows.Forms.Label labelComment;
         private System.Windows.Forms.TextBox bdPeriode;
         private System.Windows.Forms.TextBox bdComment;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.SplitContainer splitContainer7;
-        private System.Windows.Forms.SplitContainer splitContainer8;
+        private System.Windows.Forms.Label labelPériode;
+        private System.Windows.Forms.SplitContainer splitContainerScenes;
         private SceneIndexControl sceneIndexControl;
         private DataSelector dataSelector;
         private System.Windows.Forms.ToolStripButton détails;
         private System.Windows.Forms.ToolStripButton ZoomIn;
         private System.Windows.Forms.ToolStripButton ZoomOut;
         private DisplayScenesPanel displayScenesPanel;
-        private System.Windows.Forms.SplitContainer splitContainer9;
+        private System.Windows.Forms.SplitContainer splitContainerMenu;
         private TimeLine timeLine;
         private System.Windows.Forms.ToolStripLabel toolStripLabel;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlInfo;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripButton drawRoute;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer;
         private System.Windows.Forms.ToolStripButton fullscreen;
+        private System.Windows.Forms.ToolStripTextBox sceneNumber;
+        private System.Windows.Forms.ToolStripButton searchScene;
     }
 }
 
